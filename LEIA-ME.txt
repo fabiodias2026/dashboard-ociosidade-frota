@@ -1,0 +1,5 @@
+PUBLICAÇÃO GITHUB PAGES
+1. Envie index.html e dados.json à raiz do repositório.
+2. Settings > Pages > Deploy from a branch > main > /(root) > Save.
+3. Ao atualizar relatórios no painel administrativo, gere um novo dados.json e substitua-o no GitHub.
+AVISO: Repositório público disponibiliza os dados para qualquer pessoa. Não envie o painel administrativo.

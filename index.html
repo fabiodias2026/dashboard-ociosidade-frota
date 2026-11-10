@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ociosidade da Frota • Painel de Consulta</title>
+<style>
+:root{--bg:#f3f6fa;--card:#fff;--ink:#172334;--muted:#6b7788;--line:#e4eaf1;--blue:#1769aa;--blue2:#e8f2fb;--green:#17865b;--orange:#c47a16}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+header{background:#102c46;color:#fff;padding:22px clamp(16px,4vw,42px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+header h1{font-size:21px;margin:0 0 3px}header p{margin:0;color:#c6d5e3;font-size:12px}
+.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.btn{border:1px solid #cbd7e3;background:white;color:#17334d;padding:9px 12px;border-radius:9px;font-weight:650;cursor:pointer}.btn.primary{background:#1769aa;border-color:#1769aa;color:#fff}
+main{max-width:1440px;margin:auto;padding:22px clamp(12px,3vw,32px) 40px}
+.notice{background:#fff8e9;border:1px solid #f1dfb8;padding:10px 13px;border-radius:10px;color:#77501b;font-size:12px;margin-bottom:16px}
+.filters{display:grid;grid-template-columns:repeat(3,minmax(140px,1fr));gap:10px;background:var(--card);padding:14px;border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
+label{display:block;color:var(--muted);font-size:11px;font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:.04em}
+select,input{width:100%;border:1px solid #d8e0e9;background:#fff;border-radius:8px;padding:9px;color:var(--ink);min-height:38px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;min-width:0}
+.kpi .cap{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase}.kpi strong{display:block;font-size:25px;letter-spacing:-.03em;margin-top:6px}.kpi small{color:var(--muted)}
+.layout{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-bottom:16px}
+.card h2{font-size:15px;margin:0 0 12px}.sub{color:var(--muted);font-size:12px}
+.barrow{display:grid;grid-template-columns:145px 1fr 54px;gap:10px;align-items:center;margin:12px 0;font-size:12px}
+.track{height:10px;background:#edf1f5;border-radius:99px;overflow:hidden}.fill{height:100%;background:#3287c5;border-radius:99px}
+.shift{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.shift div{background:#f5f8fb;border-radius:10px;padding:12px}.shift b{display:block;font-size:17px;margin-top:4px}.shift span{font-size:11px;color:var(--muted)}
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:12px;background:#fff}table{border-collapse:collapse;width:100%;min-width:850px}th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);font-size:12px;white-space:nowrap}th{background:#f7f9fc;color:#566477;position:sticky;top:0;font-size:10px;text-transform:uppercase;letter-spacing:.04em}tr.vehicle{cursor:pointer}tr.vehicle:hover{background:#f5f9fd}.pill{display:inline-block;border-radius:99px;padding:3px 8px;background:var(--blue2);color:#16598d;font-size:10px;font-weight:700}.detail{background:#f8fbfe}.detail td{padding-left:30px;color:#526174}.empty{padding:26px;text-align:center;color:var(--muted)}
+footer{margin-top:14px;color:#7c8795;font-size:11px}
+@media(max-width:850px){.filters{grid-template-columns:repeat(2,minmax(0,1fr))}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}}
+@media(max-width:480px){header{align-items:flex-start}.filters{grid-template-columns:1fr 1fr}.kpi strong{font-size:21px}.barrow{grid-template-columns:100px 1fr 42px}.shift{grid-template-columns:repeat(2,1fr)}}
+
+.sortable{cursor:pointer;user-select:none}.sortable:hover{background:#e7f2fc;color:#15578c}.sortable:focus-visible{outline:2px solid #1769aa;outline-offset:-3px}.sortmark{display:inline-block;margin-left:5px;color:#1769aa}
+.importbar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;background:#fff;border:1px solid var(--line);padding:14px;border-radius:14px;margin-bottom:16px}.importbar>div{flex:1 1 190px}.importbar button{min-height:38px}.status{font-size:12px;color:#536778;margin:0 0 12px}.help{font-size:11px;color:#6b7788;margin-top:5px}.danger{border-color:#f0c5c5;color:#9b3333}
+</style></head>
+<body>
+<header><div><h1>Gestão de Ociosidade da Frota</h1><p>Painel gerencial • Consulta por unidade, período, categoria, veículo e turno</p></div>
+<div class="actions"><button class="btn primary" onclick="downloadCSV()">Exportar CSV filtrado</button><button class="btn" onclick="location.reload()">Atualizar dados</button></div></header>
+<main>
+<div class="notice"><b>Consulta pública:</b> dados de Ponta Grossa, Carambeí, Castro e Arapoti publicados pelo administrador. Para consultar as atualizações, use <b>Atualizar dados</b>. A importação de Excel fica restrita ao arquivo de administração.</div><div id="importStatus" class="status" role="status" aria-live="polite"></div>
+<section class="filters">
+<div><label>Unidade</label><select id="unitFilter"><option value="">Todas as unidades</option><option>Ponta Grossa</option><option>Carambeí</option><option>Castro</option><option>Arapoti</option></select></div>
+<div><label>Data inicial</label><input id="dateStart" type="date"></div>
+<div><label>Data final</label><input id="dateEnd" type="date"></div>
+<div><label>Categoria</label><select id="categoryFilter"><option value="">Todas as categorias</option></select></div>
+<div><label>Turno</label><select id="shiftFilter"><option value="">Todos os turnos</option><option value="Madrugada">Madrugada (00:00–05:59)</option><option value="Manhã">Manhã (06:00–11:59)</option><option value="Tarde">Tarde (12:00–17:59)</option><option value="Noite">Noite (18:00–23:59)</option></select></div>
+<div><label>Buscar veículo (placa ou prefixo)</label><input id="search" placeholder="Digite placa ou prefixo"></div>
+
+</section>
+<section class="kpis">
+<div class="card kpi"><div class="cap">Veículos</div><strong id="kVehicles">—</strong><small>Na seleção atual</small></div>
+<div class="card kpi"><div class="cap">Registros</div><strong id="kRecords">—</strong><small>Intervalos encontrados</small></div>
+<div class="card kpi"><div class="cap">Tempo ocioso</div><strong id="kIdle">—</strong><small>Somatório dos intervalos</small></div>
+<div class="card kpi"><div class="cap">Ociosidade real (%)</div><strong id="kPct">—</strong><small>Tempo parado ÷ tempo disponível por veículo e dia</small></div>
+</section>
+<section class="layout">
+<div class="card"><h2>Ociosidade por categoria</h2><div class="sub">Tempo ocioso acumulado na seleção atual</div><div id="categoryBars"></div></div>
+<div class="card"><h2>Distribuição por turno</h2><div class="sub">Tempo dos intervalos distribuído por faixa horária</div><div class="shift" id="shiftCards"></div></div>
+</section>
+<section class="card"><h2>Veículos e intervalos</h2><div class="sub" style="margin-bottom:10px">Clique no título de qualquer coluna para alternar crescente ▲ / decrescente ▼. Clique em um veículo para expandir os intervalos. A unidade aparece em cada linha.</div>
+<div class="tablewrap"><table><thead><tr><th class="sortable" data-sort="prefix" tabindex="0" role="button">Veículo <span class="sortmark"></span></th><th class="sortable" data-sort="unit" tabindex="0" role="button">Unidade <span class="sortmark"></span></th><th class="sortable" data-sort="category" tabindex="0" role="button">Categoria <span class="sortmark"></span></th><th class="sortable" data-sort="records" tabindex="0" role="button">Registros <span class="sortmark"></span></th><th class="sortable" data-sort="duration" tabindex="0" role="button">Tempo ocioso <span class="sortmark"></span></th><th class="sortable" data-sort="pct" tabindex="0" role="button">Ociosidade real (%) <span class="sortmark"></span></th><th class="sortable" data-sort="predominant" tabindex="0" role="button">Turno predominante <span class="sortmark"></span></th></tr></thead><tbody id="vehicleRows"></tbody></table></div></section>
+<footer>Protótipo de demonstração • Acesso por link e atualização compartilhada dependem de hospedagem e banco de dados. Confirme a regra do denominador de ociosidade antes de usar percentuais como indicador oficial.</footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+let allRows = [];
+// Dados publicados são carregados de dados.json acompanha este HTML. O histórico importado é mantido localmente.
+const INITIAL_ROWS=[];
+function keyOf(r){return [r.unit,r.date,r.category,r.plate,r.prefix,r.start??'',r.end??'',r.duration,r.pct].join('|')}
+function deduplicate(rows){const seen=new Set();return rows.filter(r=>{const k=keyOf(r);if(seen.has(k))return false;seen.add(k);return true})}
+function saveLocal(){return false}
+function loadLocal(){return false}
+const loadedSaved=false;
+function showStatus(message){document.getElementById('importStatus').textContent=message}
+function downloadFile(name,content,type){const url=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
+function exportBackup(){downloadFile('backup_ociosidade_frota_'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({version:1,exportedAt:new Date().toISOString(),rows:allRows},null,2),'application/json;charset=utf-8')}
+
+const $=id=>document.getElementById(id);
+const mins=v=>Number.isFinite(v)?v:0;
+function fmtMin(n){n=Math.round(n);let h=Math.floor(n/60),m=n%60;return h?`${h}h ${String(m).padStart(2,'0')}min`:`${m}min`}
+function labelDate(s){let [y,m,d]=s.split('-');return `${d}/${m}/${y}`}
+// Faixas oficiais configuradas para a operação. Os intervalos são semiabertos:
+// início incluído e fim excluído. Assim, 06:00 já pertence à manhã,
+// 12:00 à tarde e 18:00 à noite, sem sobreposição nem lacunas.
+const SHIFTS=[
+ {name:'Madrugada',label:'00:00–05:59',start:0,end:360},
+ {name:'Manhã',label:'06:00–11:59',start:360,end:720},
+ {name:'Tarde',label:'12:00–17:59',start:720,end:1080},
+ {name:'Noite',label:'18:00–23:59',start:1080,end:1440}
+];
+function shiftMinutes(r){
+ let result=[0,0,0,0]; if(r.start==null||r.end==null)return result;
+ let a=Number(r.start),b=Number(r.end);if(!Number.isFinite(a)||!Number.isFinite(b))return result;
+ if(b<a)b+=1440; // permite intervalos que atravessam a meia-noite
+ for(let day=0;day<2;day++) for(let i=0;i<SHIFTS.length;i++){
+  const lo=SHIFTS[i].start+day*1440,hi=SHIFTS[i].end+day*1440;
+  result[i]+=Math.max(0,Math.min(b,hi)-Math.max(a,lo));
+ }
+ return result;
+}
+function intervalShifts(r){
+ const parts=shiftMinutes(r);
+ return SHIFTS.map((shift,i)=>parts[i]>0?`${shift.name}: ${fmtMin(parts[i])}`:null).filter(Boolean).join(' • ')||'—';
+}
+function populate(){
+ const prevCat=$('categoryFilter').value;
+ const cats=[...new Set(allRows.map(r=>r.category))].filter(Boolean).sort();
+ $('categoryFilter').innerHTML='<option value="">Todas as categorias</option>'+cats.map(c=>`<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join('');
+ if(cats.includes(prevCat))$('categoryFilter').value=prevCat;
+ render();
+}
+function escapeHTML(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function filtered(){
+ const start=$('dateStart').value,end=$('dateEnd').value,unit=$('unitFilter').value,cat=$('categoryFilter').value,search=$('search').value.toLowerCase(),shift=$('shiftFilter').value;
+ return allRows.filter(r=>(!start||r.date>=start)&&(!end||r.date<=end)&&(!unit||r.unit===unit)&&(!cat||r.category===cat)&&(!search||r.plate.toLowerCase().includes(search)||r.prefix.toLowerCase().includes(search))&&(!shift||shiftMinutes(r)[['Madrugada','Manhã','Tarde','Noite'].indexOf(shift)]>0));
+}
+function vehicleDayKey(r){return [r.unit,r.plate,r.prefix,r.date].join('|')}
+function minutesAvailable(rows){return new Set(rows.map(vehicleDayKey)).size*($('shiftFilter').value?360:1440)}
+function actualIdleMinutes(rows){
+ const shift=$('shiftFilter').value;
+ const selected=SHIFTS.find(s=>s.name===shift);
+ const byDay=new Map();
+ for(const r of rows){
+  if(r.start==null||r.end==null)continue;
+  let a=Number(r.start),b=Number(r.end);
+  if(!Number.isFinite(a)||!Number.isFinite(b))continue;
+  if(b<a)b+=1440;
+  // Limita a duração à janela do dia relatado; eventos que passam da meia-noite
+  // não devem criar mais de 24h de disponibilidade no mesmo veículo-dia.
+  const windows=selected?[[selected.start,selected.end]]:[[0,1440]];
+  for(const [lo,hi] of windows){
+   const start=Math.max(lo,a),end=Math.min(hi,b);
+   if(end<=start)continue;
+   const key=vehicleDayKey(r);
+   if(!byDay.has(key))byDay.set(key,[]);
+   byDay.get(key).push([start,end]);
+  }
+ }
+ let total=0;
+ for(const intervals of byDay.values()){
+  intervals.sort((a,b)=>a[0]-b[0]);
+  let a=-1,b=-1;
+  for(const [start,end] of intervals){
+   if(start>b){if(b>a)total+=b-a;a=start;b=end}
+   else b=Math.max(b,end);
+  }
+  if(b>a)total+=b-a;
+ }
+ return total;
+}
+function realPct(rows){const available=minutesAvailable(rows);return available?100*actualIdleMinutes(rows)/available:0}
+let sortBy='prefix', sortDir='asc';
+function compareValues(a,b,key){
+ if(typeof a==='number' && typeof b==='number') return a-b;
+ return String(a??'').localeCompare(String(b??''),'pt-BR',{numeric:true,sensitivity:'base'});
+}
+function render(){
+ let rows=filtered(), groups={};
+ rows.forEach(r=>{let k=r.unit+'|'+r.category+'|'+r.plate+'|'+r.prefix;if(!groups[k])groups[k]={unit:r.unit,category:r.category,plate:r.plate,prefix:r.prefix,rows:[]};groups[k].rows.push(r)});
+ let vehicles=Object.values(groups).map(g=>{
+  const total=actualIdleMinutes(g.rows);
+  const avg=realPct(g.rows);
+  const st=[0,0,0,0];g.rows.forEach(r=>shiftMinutes(r).forEach((v,j)=>st[j]+=v));
+  const predominant=SHIFTS[st.indexOf(Math.max(...st))]?.name||'—';
+  return {...g,total,avg,predominant};
+ });
+ const sortValue=g=>({prefix:g.prefix,plate:g.plate,unit:g.unit,category:g.category,records:g.rows.length,duration:g.total,pct:g.avg,predominant:g.predominant}[sortBy]);
+ vehicles.sort((a,b)=>compareValues(sortValue(a),sortValue(b))*(sortDir==='asc'?1:-1) || compareValues(a.prefix,b.prefix));
+ let idle=actualIdleMinutes(rows), pct=realPct(rows);
+ $('kVehicles').textContent=vehicles.length;$('kRecords').textContent=rows.length;$('kIdle').textContent=fmtMin(idle);$('kPct').textContent=pct.toFixed(2).replace('.',',')+'%';
+ let byCat={};for(const c of new Set(rows.map(r=>r.category))){byCat[c]=actualIdleMinutes(rows.filter(r=>r.category===c))}
+ let max=Math.max(1,...Object.values(byCat));
+ $('categoryBars').innerHTML=Object.entries(byCat).sort((a,b)=>b[1]-a[1]).map(([c,v])=>`<div class="barrow"><span>${c}</span><div class="track"><div class="fill" style="width:${v/max*100}%"></div></div><b>${fmtMin(v)}</b></div>`).join('')||'<div class="empty">Sem dados para os filtros escolhidos.</div>';
+ let shiftNames=SHIFTS.map(s=>s.name),tot=[0,0,0,0];rows.forEach(r=>shiftMinutes(r).forEach((v,i)=>tot[i]+=v));
+ $('shiftCards').innerHTML=SHIFTS.map((s,i)=>`<div><span>${s.name} <small style="display:block;color:var(--muted)">${s.label}</small></span><b>${fmtMin(tot[i])}</b></div>`).join('');
+ $('vehicleRows').innerHTML=vehicles.map((g,i)=>{
+  let total=g.total,avg=g.avg,predominant=g.predominant;
+  let details=g.rows.slice().sort((a,b)=>a.date.localeCompare(b.date)||(a.start??-1)-(b.start??-1)).map(r=>`<tr class="detail"><td colspan="2">${r.date?labelDate(r.date):'—'} • ${escapeHTML(r.unit)} • ${escapeHTML(r.plate)} / Prefixo ${escapeHTML(r.prefix)}</td><td>Início: ${r.start==null?'—':clock(r.start)} • Fim: ${r.end==null?'—':clock(r.end)}</td><td>${fmtMin(r.start==null||r.end==null?r.duration:Math.max(0,(r.end<r.start?r.end+1440:r.end)-r.start))}</td><td>${(r.pct||0).toFixed(2).replace('.',',')}%</td><td colspan="2">${intervalShifts(r)}</td></tr>`).join('');
+  return `<tr class="vehicle" onclick="toggleDetail('d${i}')"><td><b>${escapeHTML(g.prefix)}</b> • ${escapeHTML(g.plate)} <span class="pill">ver detalhes ▾</span></td><td>${escapeHTML(g.unit)}</td><td>${escapeHTML(g.category)}</td><td>${g.rows.length}</td><td>${fmtMin(total)}</td><td>${avg.toFixed(2).replace('.',',')}%</td><td>${predominant}</td></tr><tr id="d${i}" style="display:none"><td colspan="7" style="padding:0"><table style="width:100%;min-width:700px"><tbody>${details}</tbody></table></td></tr>`;
+ }).join('')||'<tr><td colspan="7" class="empty">Nenhum veículo encontrado.</td></tr>';
+ document.querySelectorAll('th.sortable').forEach(th=>{const active=th.dataset.sort===sortBy;th.querySelector('.sortmark').textContent=active?(sortDir==='asc'?'▲':'▼'):'↕';th.setAttribute('aria-sort',active?(sortDir==='asc'?'ascending':'descending'):'none')});
+ showStatus('Base histórica: '+allRows.length+' registros em '+new Set(allRows.map(r=>r.date)).size+' data(s) e '+new Set(allRows.map(r=>r.unit)).size+' unidade(s). Seleção atual: '+rows.length+' registros.');
+}
+function clock(m){m=((Math.round(m)%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
+function toggleDetail(id){let e=$(id);e.style.display=e.style.display==='none'?'table-row':'none'}
+['unitFilter','dateStart','dateEnd','categoryFilter','shiftFilter'].forEach(id=>$(id).addEventListener('change',render));
+$('search').addEventListener('input',render);
+function activateSort(th){const key=th.dataset.sort;if(sortBy===key)sortDir=sortDir==='asc'?'desc':'asc';else{sortBy=key;sortDir='asc'}render()}
+document.querySelectorAll('th.sortable').forEach(th=>{th.addEventListener('click',()=>activateSort(th));th.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activateSort(th)}})});
+function downloadCSV(){const rows=filtered(),head=['Unidade','Data','Categoria','Placa','Prefixo','Início(min)','Fim(min)','Tempo ocioso(min)','Ociosidade (%)'];const csv=[head,...rows.map(r=>[r.unit,r.date,r.category,r.plate,r.prefix,r.start??'',r.end??'',r.duration,r.pct])].map(r=>r.map(x=>'"'+String(x??'').replaceAll('"','""')+'"').join(';')).join('\n');downloadFile('relatorio_ociosidade_filtrado.csv','\ufeff'+csv,'text/csv;charset=utf-8')}
+function excelDate(v){
+ if(v instanceof Date&&!isNaN(v))return [v.getFullYear(),String(v.getMonth()+1).padStart(2,'0'),String(v.getDate()).padStart(2,'0')].join('-');
+ if(typeof v==='number'&&window.XLSX){const d=XLSX.SSF.parse_date_code(v);if(d)return [d.y,String(d.m).padStart(2,'0'),String(d.d).padStart(2,'0')].join('-')}
+ const t=String(v??'').trim();const br=t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(br)return `${br[3]}-${br[2].padStart(2,'0')}-${br[1].padStart(2,'0')}`;
+ const iso=t.match(/^(\d{4})-(\d{2})-(\d{2})/);return iso?iso[0]:null;
+}
+function excelTime(v){
+ if(v==null||v==='')return null;
+ if(typeof v==='number')return v*1440;
+ if(v instanceof Date)return v.getHours()*60+v.getMinutes()+v.getSeconds()/60;
+ const m=String(v).trim().match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?$/);return m?Number(m[1])*60+Number(m[2])+Number(m[3]||0)/60:null;
+}
+function parseWorkbook(book,unit){
+ const sheet=book.Sheets['BASE HISTÓRICA']||book.Sheets[book.SheetNames[0]];
+ const raw=XLSX.utils.sheet_to_json(sheet,{header:1,raw:true,defval:null});
+ const normalize=t=>String(t??'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+ const headerRow=raw.findIndex(row=>Array.isArray(row)&&row.some(x=>normalize(x)==='prefixo')&&row.some(x=>normalize(x)==='placa'));
+ if(headerRow<0)throw Error('Cabeçalho não encontrado (colunas Prefixo e Placa).');
+ const hdr=raw[headerRow].map(normalize);
+ const col=(...names)=>names.map(n=>hdr.indexOf(normalize(n))).find(i=>i>=0)??-1;
+ const idx={date:col('Data'),category:col('Categoria'),plate:col('Placa'),prefix:col('Prefixo'),start:col('Horário inicial','Horario inicial'),end:col('Horário final','Horario final'),duration:col('Tempo ocioso'),pct:col('Ociosidade (%)','Ociosidade %')};
+ if(['date','category','plate','prefix','start','end','duration'].some(k=>idx[k]<0))throw Error('Faltam colunas obrigatórias no relatório.');
+ return raw.slice(headerRow+1).map(r=>{
+  const get=k=>r[idx[k]],date=excelDate(get('date'));
+  let pct=idx.pct<0?0:Number(get('pct')||0);if(!Number.isFinite(pct))pct=0;
+  return {unit,date,category:String(get('category')??'').trim(),plate:String(get('plate')??'').trim(),prefix:String(get('prefix')??'').trim(),start:excelTime(get('start')),end:excelTime(get('end')),duration:excelTime(get('duration'))||0,pct};
+ }).filter(r=>r.date&&r.category&&r.plate&&r.prefix);
+}
+async function loadPublished(){
+ showStatus('Carregando histórico publicado...');
+ try{
+  const response=await fetch('./dados.json?v='+Date.now(),{cache:'no-store'});
+  if(!response.ok)throw new Error('HTTP '+response.status);
+  const obj=await response.json();
+  if(!Array.isArray(obj.rows))throw new Error('dados.json inválido: campo rows ausente');
+  allRows=deduplicate(obj.rows.filter(r=>r&&r.date&&r.unit&&r.prefix&&r.plate&&r.category));
+  populate();
+  showStatus('Dados publicados carregados: '+allRows.length+' registros • '+new Set(allRows.map(r=>r.date)).size+' datas • '+new Set(allRows.map(r=>r.unit)).size+' unidades. Atualização: '+(obj.updatedAt||'não informada'));
+ }catch(error){
+  allRows=[];populate();
+  showStatus('Não foi possível carregar dados.json. Verifique se index.html e dados.json estão publicados na mesma pasta. Detalhe: '+error.message);
+ }
+}
+loadPublished();
+</script></body></html>
