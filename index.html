@@ -43,17 +43,18 @@ footer{margin-top:14px;color:#7c8795;font-size:11px}
 
 </section>
 <section class="kpis">
-<div class="card kpi"><div class="cap">Veículos</div><strong id="kVehicles">—</strong><small>Na seleção atual</small></div>
+<div class="card kpi"><div class="cap">Veículos</div><strong id="kVehicles">—</strong><small>Prefixos distintos na seleção (sem duplicar datas)</small></div>
 <div class="card kpi"><div class="cap">Registros</div><strong id="kRecords">—</strong><small>Intervalos encontrados</small></div>
 <div class="card kpi"><div class="cap">Tempo ocioso</div><strong id="kIdle">—</strong><small>Somatório dos intervalos</small></div>
-<div class="card kpi"><div class="cap">Ociosidade real (%)</div><strong id="kPct">—</strong><small>Tempo parado ÷ tempo disponível por veículo e dia</small></div>
+<div class="card kpi"><div class="cap">Ociosidade média</div><strong id="kPct">—</strong><small>Tempo parado real / tempo disponível dos veículos</small></div>
 </section>
 <section class="layout">
 <div class="card"><h2>Ociosidade por categoria</h2><div class="sub">Tempo ocioso acumulado na seleção atual</div><div id="categoryBars"></div></div>
 <div class="card"><h2>Distribuição por turno</h2><div class="sub">Tempo dos intervalos distribuído por faixa horária</div><div class="shift" id="shiftCards"></div></div>
 </section>
+<section class="card" style="margin-bottom:16px"><h2>Comparativo diário de ociosidade por garagem</h2><div class="sub" style="margin-bottom:12px">Percentual = minutos ociosos sem sobreposição ÷ (veículos distintos da unidade no dia × 1.440 minutos). Inclui veículos com tempo zero. Aplique os filtros de datas e categoria acima para comparar períodos equivalentes. O filtro de turno limita os intervalos considerados, e nesse caso a base é de 360 minutos por veículo.</div><div class="tablewrap"><table style="min-width:650px"><thead><tr><th>Data</th><th>Garagem</th><th>Veículos</th><th>Tempo ocioso real</th><th>Ociosidade real</th></tr></thead><tbody id="dailyCompare"></tbody></table></div></section>
 <section class="card"><h2>Veículos e intervalos</h2><div class="sub" style="margin-bottom:10px">Clique no título de qualquer coluna para alternar crescente ▲ / decrescente ▼. Clique em um veículo para expandir os intervalos. A unidade aparece em cada linha.</div>
-<div class="tablewrap"><table><thead><tr><th class="sortable" data-sort="prefix" tabindex="0" role="button">Veículo <span class="sortmark"></span></th><th class="sortable" data-sort="unit" tabindex="0" role="button">Unidade <span class="sortmark"></span></th><th class="sortable" data-sort="category" tabindex="0" role="button">Categoria <span class="sortmark"></span></th><th class="sortable" data-sort="records" tabindex="0" role="button">Registros <span class="sortmark"></span></th><th class="sortable" data-sort="duration" tabindex="0" role="button">Tempo ocioso <span class="sortmark"></span></th><th class="sortable" data-sort="pct" tabindex="0" role="button">Ociosidade real (%) <span class="sortmark"></span></th><th class="sortable" data-sort="predominant" tabindex="0" role="button">Turno predominante <span class="sortmark"></span></th></tr></thead><tbody id="vehicleRows"></tbody></table></div></section>
+<div class="tablewrap"><table><thead><tr><th class="sortable" data-sort="prefix" tabindex="0" role="button">Veículo <span class="sortmark"></span></th><th class="sortable" data-sort="unit" tabindex="0" role="button">Unidade <span class="sortmark"></span></th><th class="sortable" data-sort="category" tabindex="0" role="button">Categoria <span class="sortmark"></span></th><th class="sortable" data-sort="records" tabindex="0" role="button">Registros <span class="sortmark"></span></th><th class="sortable" data-sort="duration" tabindex="0" role="button">Tempo ocioso <span class="sortmark"></span></th><th class="sortable" data-sort="pct" tabindex="0" role="button">Ociosidade média <span class="sortmark"></span></th><th class="sortable" data-sort="predominant" tabindex="0" role="button">Turno predominante <span class="sortmark"></span></th></tr></thead><tbody id="vehicleRows"></tbody></table></div></section>
 <footer>Protótipo de demonstração • Acesso por link e atualização compartilhada dependem de hospedagem e banco de dados. Confirme a regra do denominador de ociosidade antes de usar percentuais como indicador oficial.</footer>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -109,41 +110,45 @@ function filtered(){
  const start=$('dateStart').value,end=$('dateEnd').value,unit=$('unitFilter').value,cat=$('categoryFilter').value,search=$('search').value.toLowerCase(),shift=$('shiftFilter').value;
  return allRows.filter(r=>(!start||r.date>=start)&&(!end||r.date<=end)&&(!unit||r.unit===unit)&&(!cat||r.category===cat)&&(!search||r.plate.toLowerCase().includes(search)||r.prefix.toLowerCase().includes(search))&&(!shift||shiftMinutes(r)[['Madrugada','Manhã','Tarde','Noite'].indexOf(shift)]>0));
 }
-function vehicleDayKey(r){return [r.unit,r.plate,r.prefix,r.date].join('|')}
-function minutesAvailable(rows){return new Set(rows.map(vehicleDayKey)).size*($('shiftFilter').value?360:1440)}
-function actualIdleMinutes(rows){
- const shift=$('shiftFilter').value;
- const selected=SHIFTS.find(s=>s.name===shift);
- const byDay=new Map();
- for(const r of rows){
+// Une intervalos de um veículo em um dia para não contar períodos sobrepostos duas vezes.
+function mergedMinutes(records,shiftName=''){
+ const parts=[];
+ const shiftIndex=['Madrugada','Manhã','Tarde','Noite'].indexOf(shiftName);
+ const lo=shiftIndex>=0?SHIFTS[shiftIndex].start:0;
+ const hi=shiftIndex>=0?SHIFTS[shiftIndex].end:1440;
+ for(const r of records){
   if(r.start==null||r.end==null)continue;
   let a=Number(r.start),b=Number(r.end);
   if(!Number.isFinite(a)||!Number.isFinite(b))continue;
   if(b<a)b+=1440;
-  // Limita a duração à janela do dia relatado; eventos que passam da meia-noite
-  // não devem criar mais de 24h de disponibilidade no mesmo veículo-dia.
-  const windows=selected?[[selected.start,selected.end]]:[[0,1440]];
-  for(const [lo,hi] of windows){
-   const start=Math.max(lo,a),end=Math.min(hi,b);
-   if(end<=start)continue;
-   const key=vehicleDayKey(r);
-   if(!byDay.has(key))byDay.set(key,[]);
-   byDay.get(key).push([start,end]);
-  }
+  a=Math.max(lo,a);b=Math.min(hi,b);
+  if(b>a)parts.push([a,b]);
  }
- let total=0;
- for(const intervals of byDay.values()){
-  intervals.sort((a,b)=>a[0]-b[0]);
-  let a=-1,b=-1;
-  for(const [start,end] of intervals){
-   if(start>b){if(b>a)total+=b-a;a=start;b=end}
-   else b=Math.max(b,end);
-  }
-  if(b>a)total+=b-a;
- }
+ parts.sort((a,b)=>a[0]-b[0]);
+ let total=0,begin=-1,end=-1;
+ for(const [a,b] of parts){if(begin<0){begin=a;end=b}else if(a<=end){end=Math.max(end,b)}else{total+=end-begin;begin=a;end=b}}
+ if(begin>=0)total+=end-begin;
  return total;
 }
-function realPct(rows){const available=minutesAvailable(rows);return available?100*actualIdleMinutes(rows)/available:0}
+function calculateReal(rows,shiftName=''){
+ const groups=new Map();
+ for(const r of rows){const key=[r.date,r.unit,r.prefix].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(r)}
+ let idle=0;
+ for(const recs of groups.values())idle+=mergedMinutes(recs,shiftName);
+ const available=groups.size*(shiftName?360:1440);
+ return {idle,available,pct:available?100*idle/available:0,vehicleDays:groups.size};
+}
+function renderDaily(rows){
+ const by=new Map();
+ for(const r of rows){const key=r.date+'|'+r.unit;if(!by.has(key))by.set(key,[]);by.get(key).push(r)}
+ const shift=$('shiftFilter').value;
+ const items=[...by.entries()].map(([key,recs])=>{
+  const [date,unit]=key.split('|');
+  const stats=calculateReal(recs,shift);
+  return {date,unit,vehicles:new Set(recs.map(r=>r.prefix)).size,...stats};
+ }).sort((a,b)=>b.date.localeCompare(a.date)||a.unit.localeCompare(b.unit,'pt-BR'));
+ $('dailyCompare').innerHTML=items.map(x=>`<tr><td>${labelDate(x.date)}</td><td>${escapeHTML(x.unit)}</td><td>${x.vehicles}</td><td>${fmtMin(x.idle)}</td><td><b>${x.pct.toFixed(1).replace('.',',')}%</b></td></tr>`).join('')||'<tr><td colspan="5" class="empty">Nenhum dado para os filtros escolhidos.</td></tr>';
+}
 let sortBy='prefix', sortDir='asc';
 function compareValues(a,b,key){
  if(typeof a==='number' && typeof b==='number') return a-b;
@@ -153,17 +158,18 @@ function render(){
  let rows=filtered(), groups={};
  rows.forEach(r=>{let k=r.unit+'|'+r.category+'|'+r.plate+'|'+r.prefix;if(!groups[k])groups[k]={unit:r.unit,category:r.category,plate:r.plate,prefix:r.prefix,rows:[]};groups[k].rows.push(r)});
  let vehicles=Object.values(groups).map(g=>{
-  const total=actualIdleMinutes(g.rows);
-  const avg=realPct(g.rows);
+  const total=g.rows.reduce((a,r)=>a+mins(r.duration),0);
+  const avg=g.rows.length?g.rows.reduce((a,r)=>a+(r.pct||0),0)/g.rows.length:0;
   const st=[0,0,0,0];g.rows.forEach(r=>shiftMinutes(r).forEach((v,j)=>st[j]+=v));
   const predominant=SHIFTS[st.indexOf(Math.max(...st))]?.name||'—';
   return {...g,total,avg,predominant};
  });
  const sortValue=g=>({prefix:g.prefix,plate:g.plate,unit:g.unit,category:g.category,records:g.rows.length,duration:g.total,pct:g.avg,predominant:g.predominant}[sortBy]);
  vehicles.sort((a,b)=>compareValues(sortValue(a),sortValue(b))*(sortDir==='asc'?1:-1) || compareValues(a.prefix,b.prefix));
- let idle=actualIdleMinutes(rows), pct=realPct(rows);
- $('kVehicles').textContent=vehicles.length;$('kRecords').textContent=rows.length;$('kIdle').textContent=fmtMin(idle);$('kPct').textContent=pct.toFixed(2).replace('.',',')+'%';
- let byCat={};for(const c of new Set(rows.map(r=>r.category))){byCat[c]=actualIdleMinutes(rows.filter(r=>r.category===c))}
+ let real=calculateReal(rows,$('shiftFilter').value), idle=real.idle, pct=real.pct;
+ renderDaily(rows);
+ $('kVehicles').textContent=new Set(rows.map(r=>r.prefix)).size;$('kRecords').textContent=rows.length;$('kIdle').textContent=fmtMin(idle);$('kPct').textContent=pct.toFixed(1).replace('.',',')+'%';
+ let byCat={};rows.forEach(r=>byCat[r.category]=(byCat[r.category]||0)+mins(r.duration));
  let max=Math.max(1,...Object.values(byCat));
  $('categoryBars').innerHTML=Object.entries(byCat).sort((a,b)=>b[1]-a[1]).map(([c,v])=>`<div class="barrow"><span>${c}</span><div class="track"><div class="fill" style="width:${v/max*100}%"></div></div><b>${fmtMin(v)}</b></div>`).join('')||'<div class="empty">Sem dados para os filtros escolhidos.</div>';
  let shiftNames=SHIFTS.map(s=>s.name),tot=[0,0,0,0];rows.forEach(r=>shiftMinutes(r).forEach((v,i)=>tot[i]+=v));
@@ -171,7 +177,7 @@ function render(){
  $('vehicleRows').innerHTML=vehicles.map((g,i)=>{
   let total=g.total,avg=g.avg,predominant=g.predominant;
   let details=g.rows.slice().sort((a,b)=>a.date.localeCompare(b.date)||(a.start??-1)-(b.start??-1)).map(r=>`<tr class="detail"><td colspan="2">${r.date?labelDate(r.date):'—'} • ${escapeHTML(r.unit)} • ${escapeHTML(r.plate)} / Prefixo ${escapeHTML(r.prefix)}</td><td>Início: ${r.start==null?'—':clock(r.start)} • Fim: ${r.end==null?'—':clock(r.end)}</td><td>${fmtMin(r.start==null||r.end==null?r.duration:Math.max(0,(r.end<r.start?r.end+1440:r.end)-r.start))}</td><td>${(r.pct||0).toFixed(2).replace('.',',')}%</td><td colspan="2">${intervalShifts(r)}</td></tr>`).join('');
-  return `<tr class="vehicle" onclick="toggleDetail('d${i}')"><td><b>${escapeHTML(g.prefix)}</b> • ${escapeHTML(g.plate)} <span class="pill">ver detalhes ▾</span></td><td>${escapeHTML(g.unit)}</td><td>${escapeHTML(g.category)}</td><td>${g.rows.length}</td><td>${fmtMin(total)}</td><td>${avg.toFixed(2).replace('.',',')}%</td><td>${predominant}</td></tr><tr id="d${i}" style="display:none"><td colspan="7" style="padding:0"><table style="width:100%;min-width:700px"><tbody>${details}</tbody></table></td></tr>`;
+  return `<tr class="vehicle" onclick="toggleDetail('d${i}')"><td><b>${escapeHTML(g.prefix)}</b> • ${escapeHTML(g.plate)} <span class="pill">ver detalhes ▾</span></td><td>${escapeHTML(g.unit)}</td><td>${escapeHTML(g.category)}</td><td>${g.rows.length}</td><td>${fmtMin(total)}</td><td>${avg.toFixed(1).replace('.',',')}%</td><td>${predominant}</td></tr><tr id="d${i}" style="display:none"><td colspan="7" style="padding:0"><table style="width:100%;min-width:700px"><tbody>${details}</tbody></table></td></tr>`;
  }).join('')||'<tr><td colspan="7" class="empty">Nenhum veículo encontrado.</td></tr>';
  document.querySelectorAll('th.sortable').forEach(th=>{const active=th.dataset.sort===sortBy;th.querySelector('.sortmark').textContent=active?(sortDir==='asc'?'▲':'▼'):'↕';th.setAttribute('aria-sort',active?(sortDir==='asc'?'ascending':'descending'):'none')});
  showStatus('Base histórica: '+allRows.length+' registros em '+new Set(allRows.map(r=>r.date)).size+' data(s) e '+new Set(allRows.map(r=>r.unit)).size+' unidade(s). Seleção atual: '+rows.length+' registros.');
