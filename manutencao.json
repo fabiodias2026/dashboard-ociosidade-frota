@@ -1,7 +1,3220 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-10",
+  "updatedAt": "2026-11-11",
   "orders": [
+    {
+      "os": "15.362",
+      "prefix": "39.114",
+      "prefixKey": "39114",
+      "type": "Interna",
+      "entry": "2026-10-17",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.363",
+      "prefix": "40.101",
+      "prefixKey": "40101",
+      "type": "Interna",
+      "entry": "2026-10-17",
+      "exit": "2026-10-17",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.364",
+      "prefix": "3.904",
+      "prefixKey": "3904",
+      "type": "Interna",
+      "entry": "2026-10-17",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.365",
+      "prefix": "41.101",
+      "prefixKey": "41101",
+      "type": "Interna",
+      "entry": "2026-10-17",
+      "exit": "2026-10-17",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.366",
+      "prefix": "3.818",
+      "prefixKey": "3818",
+      "type": "Interna",
+      "entry": "2026-10-17",
+      "exit": "2026-10-17",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.367",
+      "prefix": "3.712",
+      "prefixKey": "3712",
+      "type": "Interna",
+      "entry": "2026-10-17",
+      "exit": "2026-10-17",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.368",
+      "prefix": "3.712",
+      "prefixKey": "3712",
+      "type": "Interna",
+      "entry": "2026-10-17",
+      "exit": "2026-10-17",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.369",
+      "prefix": "4.001",
+      "prefixKey": "4001",
+      "type": "Interna",
+      "entry": "2026-10-17",
+      "exit": "2026-10-17",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.370",
+      "prefix": "3.716",
+      "prefixKey": "3716",
+      "type": "Interna",
+      "entry": "2026-10-17",
+      "exit": "2026-10-17",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.371",
+      "prefix": "4.301",
+      "prefixKey": "4301",
+      "type": "Interna",
+      "entry": "2026-10-17",
+      "exit": "2026-10-17",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.372",
+      "prefix": "40.202",
+      "prefixKey": "40202",
+      "type": "Interna",
+      "entry": "2026-10-17",
+      "exit": "2026-10-17",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.373",
+      "prefix": "42.105",
+      "prefixKey": "42105",
+      "type": "Interna",
+      "entry": "2026-10-17",
+      "exit": "2026-10-17",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.374",
+      "prefix": "3.108",
+      "prefixKey": "3108",
+      "type": "Interna",
+      "entry": "2026-10-17",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.375",
+      "prefix": "41.106",
+      "prefixKey": "41106",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.376",
+      "prefix": "3.903",
+      "prefixKey": "3903",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.377",
+      "prefix": "40.107",
+      "prefixKey": "40107",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.378",
+      "prefix": "3.220",
+      "prefixKey": "3220",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.379",
+      "prefix": "39.104",
+      "prefixKey": "39104",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.380",
+      "prefix": "40.205",
+      "prefixKey": "40205",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.381",
+      "prefix": "3.904",
+      "prefixKey": "3904",
+      "type": "Externa",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.382",
+      "prefix": "3.108",
+      "prefixKey": "3108",
+      "type": "Externa",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.383",
+      "prefix": "41.106",
+      "prefixKey": "41106",
+      "type": "Externa",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.384",
+      "prefix": "3.903",
+      "prefixKey": "3903",
+      "type": "Externa",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.385",
+      "prefix": "44.202",
+      "prefixKey": "44202",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.386",
+      "prefix": "40.208",
+      "prefixKey": "40208",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.387",
+      "prefix": "39.109",
+      "prefixKey": "39109",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.388",
+      "prefix": "39.109",
+      "prefixKey": "39109",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.389",
+      "prefix": "44.202",
+      "prefixKey": "44202",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.390",
+      "prefix": "44.207",
+      "prefixKey": "44207",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.391",
+      "prefix": "44.205",
+      "prefixKey": "44205",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.392",
+      "prefix": "3.812",
+      "prefixKey": "3812",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.393",
+      "prefix": "3.801",
+      "prefixKey": "3801",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.394",
+      "prefix": "39.111",
+      "prefixKey": "39111",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.395",
+      "prefix": "3.801",
+      "prefixKey": "3801",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.396",
+      "prefix": "4.301",
+      "prefixKey": "4301",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.397",
+      "prefix": "3.222",
+      "prefixKey": "3222",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.398",
+      "prefix": "3.818",
+      "prefixKey": "3818",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.399",
+      "prefix": "44.205",
+      "prefixKey": "44205",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.400",
+      "prefix": "44.203",
+      "prefixKey": "44203",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.401",
+      "prefix": "ARGO 66",
+      "prefixKey": "ARGO66",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.402",
+      "prefix": "3.818",
+      "prefixKey": "3818",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.403",
+      "prefix": "44.201",
+      "prefixKey": "44201",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.404",
+      "prefix": "4.406",
+      "prefixKey": "4406",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.405",
+      "prefix": "4.404",
+      "prefixKey": "4404",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.406",
+      "prefix": "4.402",
+      "prefixKey": "4402",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.407",
+      "prefix": "44.202",
+      "prefixKey": "44202",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.408",
+      "prefix": "3.605",
+      "prefixKey": "3605",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.409",
+      "prefix": "OFICINA",
+      "prefixKey": "OFICINA",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.410",
+      "prefix": "39.111",
+      "prefixKey": "39111",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.411",
+      "prefix": "39.115",
+      "prefixKey": "39115",
+      "type": "Externa",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.412",
+      "prefix": "4.001",
+      "prefixKey": "4001",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.413",
+      "prefix": "39.108",
+      "prefixKey": "39108",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.414",
+      "prefix": "44.201",
+      "prefixKey": "44201",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.415",
+      "prefix": "4.002",
+      "prefixKey": "4002",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.416",
+      "prefix": "4.201",
+      "prefixKey": "4201",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.417",
+      "prefix": "4.002",
+      "prefixKey": "4002",
+      "type": "Externa",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.418",
+      "prefix": "3.502",
+      "prefixKey": "3502",
+      "type": "Interna",
+      "entry": "2026-10-19",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.445",
+      "prefix": "40.201",
+      "prefixKey": "40201",
+      "type": "Externa",
+      "entry": "2026-10-19",
+      "exit": "2026-10-19",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.419",
+      "prefix": "39.111",
+      "prefixKey": "39111",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.420",
+      "prefix": "39.106",
+      "prefixKey": "39106",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.421",
+      "prefix": "41.108",
+      "prefixKey": "41108",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.422",
+      "prefix": "4.001",
+      "prefixKey": "4001",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.423",
+      "prefix": "41.103",
+      "prefixKey": "41103",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.425",
+      "prefix": "3.714",
+      "prefixKey": "3714",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.426",
+      "prefix": "39.115",
+      "prefixKey": "39115",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.427",
+      "prefix": "3.818",
+      "prefixKey": "3818",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.428",
+      "prefix": "40.101",
+      "prefixKey": "40101",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.429",
+      "prefix": "3.612",
+      "prefixKey": "3612",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.430",
+      "prefix": "40.107",
+      "prefixKey": "40107",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.431",
+      "prefix": "39.111",
+      "prefixKey": "39111",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.432",
+      "prefix": "3.906",
+      "prefixKey": "3906",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.433",
+      "prefix": "41.110",
+      "prefixKey": "41110",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.434",
+      "prefix": "40.205",
+      "prefixKey": "40205",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.435",
+      "prefix": "40.205",
+      "prefixKey": "40205",
+      "type": "Externa",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.436",
+      "prefix": "3.818",
+      "prefixKey": "3818",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.437",
+      "prefix": "41.104",
+      "prefixKey": "41104",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.438",
+      "prefix": "41.104",
+      "prefixKey": "41104",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.439",
+      "prefix": "3.803",
+      "prefixKey": "3803",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.440",
+      "prefix": "3.612",
+      "prefixKey": "3612",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.441",
+      "prefix": "3.700",
+      "prefixKey": "3700",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.444",
+      "prefix": "40.106",
+      "prefixKey": "40106",
+      "type": "Externa",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.446",
+      "prefix": "3.720",
+      "prefixKey": "3720",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.447",
+      "prefix": "3.740",
+      "prefixKey": "3740",
+      "type": "Interna",
+      "entry": "2026-10-20",
+      "exit": "2026-10-20",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.448",
+      "prefix": "3.901",
+      "prefixKey": "3901",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.449",
+      "prefix": "3.608",
+      "prefixKey": "3608",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.450",
+      "prefix": "3.505",
+      "prefixKey": "3505",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-24",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.451",
+      "prefix": "3.901",
+      "prefixKey": "3901",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.452",
+      "prefix": "3.901",
+      "prefixKey": "3901",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.453",
+      "prefix": "39.109",
+      "prefixKey": "39109",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.454",
+      "prefix": "39.105",
+      "prefixKey": "39105",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.455",
+      "prefix": "44.202",
+      "prefixKey": "44202",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.456",
+      "prefix": "3.901",
+      "prefixKey": "3901",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.457",
+      "prefix": "3.608",
+      "prefixKey": "3608",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.458",
+      "prefix": "3.005",
+      "prefixKey": "3005",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.459",
+      "prefix": "3.903",
+      "prefixKey": "3903",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.460",
+      "prefix": "40.209",
+      "prefixKey": "40209",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.461",
+      "prefix": "39.109",
+      "prefixKey": "39109",
+      "type": "Externa",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.462",
+      "prefix": "42.106",
+      "prefixKey": "42106",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.463",
+      "prefix": "3.217",
+      "prefixKey": "3217",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.464",
+      "prefix": "3.807",
+      "prefixKey": "3807",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.465",
+      "prefix": "4.105",
+      "prefixKey": "4105",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.466",
+      "prefix": "41.108",
+      "prefixKey": "41108",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.467",
+      "prefix": "4.105",
+      "prefixKey": "4105",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.468",
+      "prefix": "3.608",
+      "prefixKey": "3608",
+      "type": "Externa",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.469",
+      "prefix": "40.207",
+      "prefixKey": "40207",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.470",
+      "prefix": "4.403",
+      "prefixKey": "4403",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.471",
+      "prefix": "41.108",
+      "prefixKey": "41108",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.472",
+      "prefix": "3.700",
+      "prefixKey": "3700",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.473",
+      "prefix": "41.108",
+      "prefixKey": "41108",
+      "type": "Externa",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.474",
+      "prefix": "44.205",
+      "prefixKey": "44205",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.475",
+      "prefix": "41.110",
+      "prefixKey": "41110",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.477",
+      "prefix": "40.207",
+      "prefixKey": "40207",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.478",
+      "prefix": "3.712",
+      "prefixKey": "3712",
+      "type": "Interna",
+      "entry": "2026-10-21",
+      "exit": "2026-10-21",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.495",
+      "prefix": "41.109",
+      "prefixKey": "41109",
+      "type": "Externa",
+      "entry": "2026-10-21",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.479",
+      "prefix": "2.006",
+      "prefixKey": "2006",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.480",
+      "prefix": "2.006",
+      "prefixKey": "2006",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.481",
+      "prefix": "3.502",
+      "prefixKey": "3502",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.482",
+      "prefix": "44.208",
+      "prefixKey": "44208",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.483",
+      "prefix": "4.105",
+      "prefixKey": "4105",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.484",
+      "prefix": "3.904",
+      "prefixKey": "3904",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.485",
+      "prefix": "41.102",
+      "prefixKey": "41102",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.486",
+      "prefix": "4.107",
+      "prefixKey": "4107",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.487",
+      "prefix": "3.110",
+      "prefixKey": "3110",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.488",
+      "prefix": "41.201",
+      "prefixKey": "41201",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.489",
+      "prefix": "3.906",
+      "prefixKey": "3906",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.490",
+      "prefix": "3.906",
+      "prefixKey": "3906",
+      "type": "Externa",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.491",
+      "prefix": "3.903",
+      "prefixKey": "3903",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.492",
+      "prefix": "3.903",
+      "prefixKey": "3903",
+      "type": "Externa",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.493",
+      "prefix": "3.801",
+      "prefixKey": "3801",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.494",
+      "prefix": "44.205",
+      "prefixKey": "44205",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.496",
+      "prefix": "40.202",
+      "prefixKey": "40202",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.497",
+      "prefix": "3.613",
+      "prefixKey": "3613",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.498",
+      "prefix": "41.102",
+      "prefixKey": "41102",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.499",
+      "prefix": "39.115",
+      "prefixKey": "39115",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.500",
+      "prefix": "3.802",
+      "prefixKey": "3802",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.501",
+      "prefix": "3.713",
+      "prefixKey": "3713",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.502",
+      "prefix": "3.217",
+      "prefixKey": "3217",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.503",
+      "prefix": "3.715",
+      "prefixKey": "3715",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.504",
+      "prefix": "41.108",
+      "prefixKey": "41108",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.505",
+      "prefix": "3.604",
+      "prefixKey": "3604",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.506",
+      "prefix": "3.818",
+      "prefixKey": "3818",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.507",
+      "prefix": "39.113",
+      "prefixKey": "39113",
+      "type": "Externa",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.508",
+      "prefix": "3.712",
+      "prefixKey": "3712",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.509",
+      "prefix": "3.713",
+      "prefixKey": "3713",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.510",
+      "prefix": "3.806",
+      "prefixKey": "3806",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.511",
+      "prefix": "44.208",
+      "prefixKey": "44208",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-22",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.512",
+      "prefix": "41.107",
+      "prefixKey": "41107",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.513",
+      "prefix": "3.200",
+      "prefixKey": "3200",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.514",
+      "prefix": "3.227",
+      "prefixKey": "3227",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-24",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.515",
+      "prefix": "39.114",
+      "prefixKey": "39114",
+      "type": "Interna",
+      "entry": "2026-10-22",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.516",
+      "prefix": "3.802",
+      "prefixKey": "3802",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.517",
+      "prefix": "3.801",
+      "prefixKey": "3801",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.518",
+      "prefix": "40.210",
+      "prefixKey": "40210",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.519",
+      "prefix": "3.215",
+      "prefixKey": "3215",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-24",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.520",
+      "prefix": "3.212",
+      "prefixKey": "3212",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.521",
+      "prefix": "4.107",
+      "prefixKey": "4107",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.522",
+      "prefix": "OFICINA",
+      "prefixKey": "OFICINA",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.523",
+      "prefix": "3.716",
+      "prefixKey": "3716",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.524",
+      "prefix": "3.214",
+      "prefixKey": "3214",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.525",
+      "prefix": "4.402",
+      "prefixKey": "4402",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.526",
+      "prefix": "44.208",
+      "prefixKey": "44208",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.527",
+      "prefix": "40.207",
+      "prefixKey": "40207",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.528",
+      "prefix": "3.217",
+      "prefixKey": "3217",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.529",
+      "prefix": "4.403",
+      "prefixKey": "4403",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.530",
+      "prefix": "39.115",
+      "prefixKey": "39115",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.531",
+      "prefix": "40.203",
+      "prefixKey": "40203",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.532",
+      "prefix": "40.203",
+      "prefixKey": "40203",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.533",
+      "prefix": "3.712",
+      "prefixKey": "3712",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.534",
+      "prefix": "4.105",
+      "prefixKey": "4105",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.535",
+      "prefix": "3.730",
+      "prefixKey": "3730",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.536",
+      "prefix": "3.005",
+      "prefixKey": "3005",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.537",
+      "prefix": "4.403",
+      "prefixKey": "4403",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.538",
+      "prefix": "ARGO 67",
+      "prefixKey": "ARGO67",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.539",
+      "prefix": "39.103",
+      "prefixKey": "39103",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.540",
+      "prefix": "3.819",
+      "prefixKey": "3819",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.541",
+      "prefix": "39.103",
+      "prefixKey": "39103",
+      "type": "Interna",
+      "entry": "2026-10-23",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.542",
+      "prefix": "3.605",
+      "prefixKey": "3605",
+      "type": "Interna",
+      "entry": "2026-10-24",
+      "exit": "2026-10-24",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.543",
+      "prefix": "39.111",
+      "prefixKey": "39111",
+      "type": "Interna",
+      "entry": "2026-10-24",
+      "exit": "2026-10-24",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.544",
+      "prefix": "3.605",
+      "prefixKey": "3605",
+      "type": "Interna",
+      "entry": "2026-10-24",
+      "exit": "2026-10-23",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.545",
+      "prefix": "39.114",
+      "prefixKey": "39114",
+      "type": "Interna",
+      "entry": "2026-10-24",
+      "exit": "2026-10-24",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.546",
+      "prefix": "4.401",
+      "prefixKey": "4401",
+      "type": "Interna",
+      "entry": "2026-10-24",
+      "exit": "2026-10-24",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.547",
+      "prefix": "39.105",
+      "prefixKey": "39105",
+      "type": "Interna",
+      "entry": "2026-10-24",
+      "exit": "2026-10-24",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.548",
+      "prefix": "39.113",
+      "prefixKey": "39113",
+      "type": "Interna",
+      "entry": "2026-10-24",
+      "exit": "2026-10-24",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.549",
+      "prefix": "4.001",
+      "prefixKey": "4001",
+      "type": "Interna",
+      "entry": "2026-10-24",
+      "exit": "2026-10-24",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.550",
+      "prefix": "3.605",
+      "prefixKey": "3605",
+      "type": "Interna",
+      "entry": "2026-10-24",
+      "exit": "2026-10-24",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.551",
+      "prefix": "39.104",
+      "prefixKey": "39104",
+      "type": "Interna",
+      "entry": "2026-10-24",
+      "exit": "2026-10-24",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.552",
+      "prefix": "3.901",
+      "prefixKey": "3901",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.553",
+      "prefix": "40.103",
+      "prefixKey": "40103",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.554",
+      "prefix": "3.227",
+      "prefixKey": "3227",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.555",
+      "prefix": "3.807",
+      "prefixKey": "3807",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.556",
+      "prefix": "41.105",
+      "prefixKey": "41105",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.557",
+      "prefix": "ARGO 66",
+      "prefixKey": "ARGO66",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.558",
+      "prefix": "40.104",
+      "prefixKey": "40104",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.559",
+      "prefix": "41.104",
+      "prefixKey": "41104",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.560",
+      "prefix": "3.220",
+      "prefixKey": "3220",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.561",
+      "prefix": "3.816",
+      "prefixKey": "3816",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.562",
+      "prefix": "44.208",
+      "prefixKey": "44208",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.563",
+      "prefix": "4.201",
+      "prefixKey": "4201",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.564",
+      "prefix": "40.207",
+      "prefixKey": "40207",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.565",
+      "prefix": "4.406",
+      "prefixKey": "4406",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.566",
+      "prefix": "44.202",
+      "prefixKey": "44202",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.568",
+      "prefix": "39.104",
+      "prefixKey": "39104",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.569",
+      "prefix": "42.107",
+      "prefixKey": "42107",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.570",
+      "prefix": "42.107",
+      "prefixKey": "42107",
+      "type": "Externa",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.571",
+      "prefix": "3.202",
+      "prefixKey": "3202",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.572",
+      "prefix": "3.202",
+      "prefixKey": "3202",
+      "type": "Externa",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.573",
+      "prefix": "40.108",
+      "prefixKey": "40108",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.574",
+      "prefix": "42.103",
+      "prefixKey": "42103",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.575",
+      "prefix": "40.203",
+      "prefixKey": "40203",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.576",
+      "prefix": "3.709",
+      "prefixKey": "3709",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.577",
+      "prefix": "3.901",
+      "prefixKey": "3901",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.578",
+      "prefix": "3.901",
+      "prefixKey": "3901",
+      "type": "Externa",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.579",
+      "prefix": "3.709",
+      "prefixKey": "3709",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.580",
+      "prefix": "41.105",
+      "prefixKey": "41105",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.581",
+      "prefix": "42.102",
+      "prefixKey": "42102",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.583",
+      "prefix": "3.807",
+      "prefixKey": "3807",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.584",
+      "prefix": "40.108",
+      "prefixKey": "40108",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.585",
+      "prefix": "41.105",
+      "prefixKey": "41105",
+      "type": "Interna",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.586",
+      "prefix": "4.401",
+      "prefixKey": "4401",
+      "type": "Externa",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.587",
+      "prefix": "4.406",
+      "prefixKey": "4406",
+      "type": "Externa",
+      "entry": "2026-10-26",
+      "exit": "2026-10-26",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.588",
+      "prefix": "3.709",
+      "prefixKey": "3709",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.589",
+      "prefix": "41.107",
+      "prefixKey": "41107",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.590",
+      "prefix": "41.101",
+      "prefixKey": "41101",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.591",
+      "prefix": "3.715",
+      "prefixKey": "3715",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.592",
+      "prefix": "41.105",
+      "prefixKey": "41105",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.593",
+      "prefix": "44.206",
+      "prefixKey": "44206",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.594",
+      "prefix": "41.112",
+      "prefixKey": "41112",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.595",
+      "prefix": "40.211",
+      "prefixKey": "40211",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.596",
+      "prefix": "40.209",
+      "prefixKey": "40209",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.597",
+      "prefix": "3.808",
+      "prefixKey": "3808",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.598",
+      "prefix": "3.502",
+      "prefixKey": "3502",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.599",
+      "prefix": "3.219",
+      "prefixKey": "3219",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.600",
+      "prefix": "3.709",
+      "prefixKey": "3709",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.601",
+      "prefix": "3.807",
+      "prefixKey": "3807",
+      "type": "Externa",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.602",
+      "prefix": "3.706",
+      "prefixKey": "3706",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.603",
+      "prefix": "42.104",
+      "prefixKey": "42104",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.604",
+      "prefix": "42.104",
+      "prefixKey": "42104",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.605",
+      "prefix": "3.812",
+      "prefixKey": "3812",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.606",
+      "prefix": "3.217",
+      "prefixKey": "3217",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.607",
+      "prefix": "41.102",
+      "prefixKey": "41102",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.608",
+      "prefix": "39.104",
+      "prefixKey": "39104",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.609",
+      "prefix": "4.003",
+      "prefixKey": "4003",
+      "type": "Externa",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.610",
+      "prefix": "44.206",
+      "prefixKey": "44206",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.611",
+      "prefix": "3.200",
+      "prefixKey": "3200",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.612",
+      "prefix": "3.200",
+      "prefixKey": "3200",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.613",
+      "prefix": "39.103",
+      "prefixKey": "39103",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.614",
+      "prefix": "3.612",
+      "prefixKey": "3612",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.615",
+      "prefix": "3.612",
+      "prefixKey": "3612",
+      "type": "Interna",
+      "entry": "2026-10-27",
+      "exit": "2026-10-27",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.616",
+      "prefix": "39.103",
+      "prefixKey": "39103",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.617",
+      "prefix": "3.810",
+      "prefixKey": "3810",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.618",
+      "prefix": "39.106",
+      "prefixKey": "39106",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.619",
+      "prefix": "3.715",
+      "prefixKey": "3715",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.620",
+      "prefix": "39.106",
+      "prefixKey": "39106",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.621",
+      "prefix": "39.106",
+      "prefixKey": "39106",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.622",
+      "prefix": "41.108",
+      "prefixKey": "41108",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.623",
+      "prefix": "44.209",
+      "prefixKey": "44209",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.624",
+      "prefix": "3.719",
+      "prefixKey": "3719",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.625",
+      "prefix": "41.108",
+      "prefixKey": "41108",
+      "type": "Externa",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.626",
+      "prefix": "40.104",
+      "prefixKey": "40104",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.627",
+      "prefix": "4.101",
+      "prefixKey": "4101",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.628",
+      "prefix": "41.103",
+      "prefixKey": "41103",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.629",
+      "prefix": "4.408",
+      "prefixKey": "4408",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.630",
+      "prefix": "40.208",
+      "prefixKey": "40208",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.632",
+      "prefix": "40.205",
+      "prefixKey": "40205",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.634",
+      "prefix": "42.302",
+      "prefixKey": "42302",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.635",
+      "prefix": "41.111",
+      "prefixKey": "41111",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.636",
+      "prefix": "3.901",
+      "prefixKey": "3901",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.637",
+      "prefix": "3.713",
+      "prefixKey": "3713",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.638",
+      "prefix": "3.810",
+      "prefixKey": "3810",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.639",
+      "prefix": "41.111",
+      "prefixKey": "41111",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.640",
+      "prefix": "3.704",
+      "prefixKey": "3704",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.641",
+      "prefix": "3.704",
+      "prefixKey": "3704",
+      "type": "Externa",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.642",
+      "prefix": "3.719",
+      "prefixKey": "3719",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.643",
+      "prefix": "41.101",
+      "prefixKey": "41101",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.644",
+      "prefix": "41.101",
+      "prefixKey": "41101",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.645",
+      "prefix": "3.612",
+      "prefixKey": "3612",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.646",
+      "prefix": "44.209",
+      "prefixKey": "44209",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.647",
+      "prefix": "3.811",
+      "prefixKey": "3811",
+      "type": "Interna",
+      "entry": "2026-10-28",
+      "exit": "2026-10-28",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.648",
+      "prefix": "3.819",
+      "prefixKey": "3819",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.649",
+      "prefix": "3.819",
+      "prefixKey": "3819",
+      "type": "Externa",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.650",
+      "prefix": "39.112",
+      "prefixKey": "39112",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.651",
+      "prefix": "OFICINA",
+      "prefixKey": "OFICINA",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.652",
+      "prefix": "42.105",
+      "prefixKey": "42105",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.653",
+      "prefix": "3.205",
+      "prefixKey": "3205",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.654",
+      "prefix": "3.108",
+      "prefixKey": "3108",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.655",
+      "prefix": "3.205",
+      "prefixKey": "3205",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.656",
+      "prefix": "3.720",
+      "prefixKey": "3720",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.658",
+      "prefix": "4.201",
+      "prefixKey": "4201",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.659",
+      "prefix": "4.002",
+      "prefixKey": "4002",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.660",
+      "prefix": "4.101",
+      "prefixKey": "4101",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.661",
+      "prefix": "39.112",
+      "prefixKey": "39112",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.662",
+      "prefix": "39.103",
+      "prefixKey": "39103",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.663",
+      "prefix": "3.505",
+      "prefixKey": "3505",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.664",
+      "prefix": "40.105",
+      "prefixKey": "40105",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.665",
+      "prefix": "3.904",
+      "prefixKey": "3904",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.666",
+      "prefix": "4.101",
+      "prefixKey": "4101",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.667",
+      "prefix": "42.104",
+      "prefixKey": "42104",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.668",
+      "prefix": "3.505",
+      "prefixKey": "3505",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.669",
+      "prefix": "4.105",
+      "prefixKey": "4105",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.670",
+      "prefix": "42.101",
+      "prefixKey": "42101",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.671",
+      "prefix": "3.719",
+      "prefixKey": "3719",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.672",
+      "prefix": "3.803",
+      "prefixKey": "3803",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.673",
+      "prefix": "3.501",
+      "prefixKey": "3501",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.674",
+      "prefix": "OFICINA",
+      "prefixKey": "OFICINA",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.675",
+      "prefix": "39.103",
+      "prefixKey": "39103",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.676",
+      "prefix": "4.003",
+      "prefixKey": "4003",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.677",
+      "prefix": "42.101",
+      "prefixKey": "42101",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.678",
+      "prefix": "39.113",
+      "prefixKey": "39113",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.679",
+      "prefix": "39.113",
+      "prefixKey": "39113",
+      "type": "Externa",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.680",
+      "prefix": "3.004",
+      "prefixKey": "3004",
+      "type": "Interna",
+      "entry": "2026-10-29",
+      "exit": "2026-10-29",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.682",
+      "prefix": "42.105",
+      "prefixKey": "42105",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.683",
+      "prefix": "42.110",
+      "prefixKey": "42110",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.684",
+      "prefix": "4.101",
+      "prefixKey": "4101",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.685",
+      "prefix": "OFICINA",
+      "prefixKey": "OFICINA",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.686",
+      "prefix": "39.105",
+      "prefixKey": "39105",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.687",
+      "prefix": "42.105",
+      "prefixKey": "42105",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.688",
+      "prefix": "3.730",
+      "prefixKey": "3730",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.689",
+      "prefix": "40.211",
+      "prefixKey": "40211",
+      "type": "Externa",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.690",
+      "prefix": "3.211",
+      "prefixKey": "3211",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.691",
+      "prefix": "3.108",
+      "prefixKey": "3108",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.692",
+      "prefix": "4.406",
+      "prefixKey": "4406",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.693",
+      "prefix": "3.404",
+      "prefixKey": "3404",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.694",
+      "prefix": "3.404",
+      "prefixKey": "3404",
+      "type": "Externa",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.695",
+      "prefix": "41.109",
+      "prefixKey": "41109",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-31",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.696",
+      "prefix": "3.810",
+      "prefixKey": "3810",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.697",
+      "prefix": "3.220",
+      "prefixKey": "3220",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.698",
+      "prefix": "3.216",
+      "prefixKey": "3216",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.699",
+      "prefix": "3.808",
+      "prefixKey": "3808",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.700",
+      "prefix": "39.108",
+      "prefixKey": "39108",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.701",
+      "prefix": "41.101",
+      "prefixKey": "41101",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.702",
+      "prefix": "3.211",
+      "prefixKey": "3211",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.703",
+      "prefix": "41.101",
+      "prefixKey": "41101",
+      "type": "Externa",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.704",
+      "prefix": "OFICINA",
+      "prefixKey": "OFICINA",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.705",
+      "prefix": "3.810",
+      "prefixKey": "3810",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.706",
+      "prefix": "3.714",
+      "prefixKey": "3714",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.707",
+      "prefix": "3.810",
+      "prefixKey": "3810",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.708",
+      "prefix": "3.810",
+      "prefixKey": "3810",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.709",
+      "prefix": "3.730",
+      "prefixKey": "3730",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.710",
+      "prefix": "OFICINA",
+      "prefixKey": "OFICINA",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.711",
+      "prefix": "OFICINA",
+      "prefixKey": "OFICINA",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.712",
+      "prefix": "3.714",
+      "prefixKey": "3714",
+      "type": "Externa",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.713",
+      "prefix": "44.201",
+      "prefixKey": "44201",
+      "type": "Interna",
+      "entry": "2026-10-30",
+      "exit": "2026-10-30",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.714",
+      "prefix": "39.104",
+      "prefixKey": "39104",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-10-31",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.715",
+      "prefix": "44.201",
+      "prefixKey": "44201",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-10-31",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.716",
+      "prefix": "44.202",
+      "prefixKey": "44202",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-10-31",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.717",
+      "prefix": "44.203",
+      "prefixKey": "44203",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-11-03",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.718",
+      "prefix": "39.113",
+      "prefixKey": "39113",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-10-31",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.719",
+      "prefix": "39.112",
+      "prefixKey": "39112",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-10-31",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.720",
+      "prefix": "39.114",
+      "prefixKey": "39114",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-10-31",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.721",
+      "prefix": "3.805",
+      "prefixKey": "3805",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-10-31",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.722",
+      "prefix": "3.608",
+      "prefixKey": "3608",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-11-03",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.723",
+      "prefix": "42.103",
+      "prefixKey": "42103",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-10-31",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.724",
+      "prefix": "42.101",
+      "prefixKey": "42101",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-10-31",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.725",
+      "prefix": "4.401",
+      "prefixKey": "4401",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-10-31",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.726",
+      "prefix": "3.808",
+      "prefixKey": "3808",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-11-04",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.727",
+      "prefix": "3.808",
+      "prefixKey": "3808",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-11-05",
+      "status": "Concluido"
+    },
+    {
+      "os": "15.747",
+      "prefix": "42.303",
+      "prefixKey": "42303",
+      "type": "Interna",
+      "entry": "2026-10-31",
+      "exit": "2026-11-03",
+      "status": "Concluido"
+    },
     {
       "os": "15.839",
       "prefix": "40.105",
