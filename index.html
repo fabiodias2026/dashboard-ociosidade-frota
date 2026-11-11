@@ -46,7 +46,7 @@ footer{margin-top:14px;color:#7c8795;font-size:11px}
 
 </section>
 <section class="kpis">
-<div class="card kpi"><div class="cap">Veículos</div><strong id="kVehicles">—</strong><small>Prefixos distintos na seleção (sem duplicar datas)</small></div>
+<div class="card kpi"><div class="cap">Veículos</div><strong id="kVehicles">—</strong><small id="kVehiclesNote">Prefixos distintos na seleção (sem duplicar datas)</small></div>
 <div class="card kpi"><div class="cap">Registros</div><strong id="kRecords">—</strong><small>Intervalos encontrados</small></div>
 <div class="card kpi"><div class="cap">Tempo ocioso</div><strong id="kIdle">—</strong><small>Somatório dos intervalos</small></div>
 <div class="card kpi"><div class="cap">Ociosidade real</div><strong id="kPct">—</strong><small>Tempo parado real / tempo disponível dos veículos</small></div>
@@ -175,7 +175,29 @@ function render(){
  vehicles.sort((a,b)=>compareValues(sortValue(a),sortValue(b))*(sortDir==='asc'?1:-1) || compareValues(a.prefix,b.prefix));
  let real=calculateReal(rows,$('shiftFilter').value), idle=real.idle, pct=real.pct;
  renderDaily(rows);
- $('kVehicles').textContent=new Set(rows.map(r=>r.prefix)).size;$('kRecords').textContent=rows.length;$('kIdle').textContent=fmtMin(idle);$('kPct').textContent=pct.toFixed(1).replace('.',',')+'%';
+ // Todas as unidades: frota distinta. Unidade específica: somente prefixos com
+ // ao menos um intervalo de ociosidade positivo no período/turno selecionado.
+ // Isso indica atividade ociosa registrada na unidade, não lotação oficial.
+ const selectedUnit=$('unitFilter').value;
+ let countedVehicles;
+ if(selectedUnit){
+  const byVehicleDay=new Map();
+  for(const r of rows){
+   const k=prefixKey(r.prefix)+'|'+r.date;
+   if(!byVehicleDay.has(k))byVehicleDay.set(k,[]);
+   byVehicleDay.get(k).push(r);
+  }
+  const activePrefixes=new Set();
+  for(const [k,recs] of byVehicleDay){
+   if(mergedMinutes(recs,$('shiftFilter').value)>0)activePrefixes.add(k.split('|')[0]);
+  }
+  countedVehicles=activePrefixes.size;
+  $('kVehiclesNote').textContent='Prefixos com ociosidade positiva na unidade (estimativa; não comprova lotação)';
+ }else{
+  countedVehicles=new Set(rows.map(r=>prefixKey(r.prefix))).size;
+  $('kVehiclesNote').textContent='Prefixos distintos na seleção (sem duplicar unidades ou datas)';
+ }
+ $('kVehicles').textContent=countedVehicles.toLocaleString('pt-BR');$('kRecords').textContent=rows.length;$('kIdle').textContent=fmtMin(idle);$('kPct').textContent=pct.toFixed(1).replace('.',',')+'%';
  let byCat={};rows.forEach(r=>byCat[r.category]=(byCat[r.category]||0)+mins(r.duration));
  let max=Math.max(1,...Object.values(byCat));
  $('categoryBars').innerHTML=Object.entries(byCat).sort((a,b)=>b[1]-a[1]).map(([c,v])=>`<div class="barrow"><span>${c}</span><div class="track"><div class="fill" style="width:${v/max*100}%"></div></div><b>${fmtMin(v)}</b></div>`).join('')||'<div class="empty">Sem dados para os filtros escolhidos.</div>';
