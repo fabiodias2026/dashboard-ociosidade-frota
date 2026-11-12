@@ -1,6 +1,7 @@
-<!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ociosidade da Frota • Painel de Consulta</title>
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Dashboard Gerencial V8 • Viação Iapó</title>
 <style>
 :root{--bg:#f3f6fa;--card:#fff;--ink:#172334;--muted:#6b7788;--line:#e4eaf1;--blue:#1769aa;--blue2:#e8f2fb;--green:#17865b;--orange:#c47a16}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
@@ -27,54 +28,133 @@ footer{margin-top:14px;color:#7c8795;font-size:11px}
 
 .sortable{cursor:pointer;user-select:none}.sortable:hover{background:#e7f2fc;color:#15578c}.sortable:focus-visible{outline:2px solid #1769aa;outline-offset:-3px}.sortmark{display:inline-block;margin-left:5px;color:#1769aa}
 .importbar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;background:#fff;border:1px solid var(--line);padding:14px;border-radius:14px;margin-bottom:16px}.importbar>div{flex:1 1 190px}.importbar button{min-height:38px}.status{font-size:12px;color:#536778;margin:0 0 12px}.help{font-size:11px;color:#6b7788;margin-top:5px}.danger{border-color:#f0c5c5;color:#9b3333}
+</style><style>
+/* V8 apresentação gerencial: abas sem alterar cálculos ou dados */
+.tabbar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px;padding:9px;background:#fff;border:1px solid #e4eaf1;border-radius:14px;position:sticky;top:0;z-index:20}
+.tabbtn{border:1px solid transparent;background:transparent;color:#344a60;border-radius:9px;padding:12px 15px;font-weight:750;cursor:pointer;font-size:13px}
+.tabbtn:hover{background:#eaf3fb}.tabbtn[aria-selected=true]{background:#1769aa;color:#fff}
+.tabpane{display:none}.tabpane.active{display:block}.sectionintro{margin:4px 0 15px}.sectionintro h2{font-size:19px;margin:0 0 4px}.sectionintro p{font-size:12px;color:#66788a;margin:0}
+#overviewPane .kpis .card:nth-child(2){display:none}#overviewPane .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+#overviewPane .kpis .card:nth-child(4){border-color:#9cc7e9;background:#f6fbff}
+#overviewPane .layout{display:none}
+#fleetPane .layout{display:grid}
+#fleetPane .card.vehicle-card{margin-bottom:16px}
+#fleetPane .fleet-vehicle-fold{margin-bottom:16px;border:1px solid #e4eaf1;border-radius:14px;background:#fff;overflow:hidden}
+#fleetPane .fleet-vehicle-fold>summary{cursor:pointer;list-style:none;padding:17px 19px;font-weight:750;font-size:16px;color:#112c46;display:flex;align-items:center;gap:10px;user-select:none}
+#fleetPane .fleet-vehicle-fold>summary::-webkit-details-marker{display:none}
+#fleetPane .fleet-vehicle-fold>summary::before{content:'▶';color:#1769aa;font-size:13px;transition:transform .15s ease}
+#fleetPane .fleet-vehicle-fold[open]>summary::before{transform:rotate(90deg)}
+#fleetPane .fleet-vehicle-fold>summary:hover{background:#f2f7fc}
+#fleetPane .fleet-vehicle-fold>.vehicle-card{border:0;border-top:1px solid #e4eaf1;border-radius:0;margin:0!important}
 
-/* Seções recolhíveis */
-.panel-fold{margin-bottom:16px;overflow:hidden}.panel-fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:15px;font-weight:750;padding:2px 0;user-select:none}.panel-fold>summary::-webkit-details-marker{display:none}.panel-fold>summary:before{content:'▸';font-size:17px;color:var(--blue);display:inline-block;transition:transform .15s}.panel-fold[open]>summary:before{transform:rotate(90deg)}.panel-fold .fold-content{margin-top:12px}.os-inline{background:#eef6fd;border:1px solid #cfe3f4;border-radius:9px;padding:11px 14px;margin:8px 12px 12px}.os-inline h3{margin:0 0 6px;font-size:13px;color:#174e78}.os-inline table{min-width:620px}.os-inline td,.os-inline th{white-space:normal}.os-pill{display:inline-block;background:#e1f2e9;color:#17633d;padding:3px 7px;border-radius:6px;font-size:11px;font-weight:700;margin-top:4px}.os-pill.external{background:#fff0da;color:#915b12}
+#historyPane .notice{margin-top:10px}
+#historyPane .importbar{margin-top:12px}
+#historyPane .history-controls{margin-bottom:16px}
+#historyPane .history-controls .btn{margin:4px}
+#overviewPane .quickcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:16px}
+#overviewPane .quickcard{background:#fff;border:1px solid #e4eaf1;border-radius:14px;padding:17px;cursor:pointer;text-align:left;color:#172334}
+#overviewPane .quickcard b{display:block;font-size:14px;margin-bottom:4px}#overviewPane .quickcard small{color:#64748b}
+#overviewPane .quickcard:hover{border-color:#1769aa;box-shadow:0 3px 12px #1c659517}
+#historyPane .notice:first-child{display:block}
+@media(max-width:850px){#overviewPane .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}#overviewPane .quickcards{grid-template-columns:1fr}.tabbar{position:static}}
+@media(max-width:520px){#overviewPane .kpis{grid-template-columns:1fr}.tabbtn{flex:1 1 40%;padding:10px 6px}}
+</style><style>
+.garage-panel{margin:0 0 16px;padding:20px!important}
+.garage-head{display:flex;justify-content:space-between;align-items:start;gap:14px;flex-wrap:wrap;margin-bottom:15px}
+.garage-head h2{font-size:18px;margin:0 0 4px}
+.garage-switch{display:flex;gap:5px;padding:4px;background:#eef3f8;border-radius:10px;flex-wrap:wrap}
+.garage-switch button{border:0;background:transparent;color:#34506a;padding:8px 12px;border-radius:7px;cursor:pointer;font-weight:650;font-size:12px}
+.garage-switch button.active{background:#1769aa;color:white}
+.garage-grid{display:grid;gap:14px;margin:12px 0 15px}
+.garage-item{display:grid;grid-template-columns:minmax(160px,1.1fr) minmax(90px,2fr) 120px;align-items:center;gap:15px}
+.garage-name{font-weight:650;color:#203a53}.garage-track{height:12px;background:#e9f0f6;border-radius:99px;overflow:hidden}.garage-fill{height:100%;background:#3388c4;border-radius:99px}
+.garage-item strong{text-align:right;font-size:19px;color:#102c46}.garage-item strong span{font-size:11px;color:#697b8c;font-weight:500}
+@media(max-width:650px){.garage-item{grid-template-columns:1fr 80px;gap:6px}.garage-track{grid-column:1 / -1;grid-row:2}.garage-item strong{grid-column:2;grid-row:1}.garage-name{grid-column:1;grid-row:1}}
+ .os-alert{display:inline-flex;align-items:center;gap:4px;margin-left:5px;padding:3px 7px;border-radius:7px;background:#fee2e2;color:#9f1239;border:1px solid #fda4af;font-size:11px;font-weight:800;vertical-align:middle;cursor:help;white-space:nowrap}.os-alert small{background:#be123c;color:white;border-radius:99px;padding:0 5px;font-size:10px} </style><style>
+/* Publicação: interface somente de consulta */
+header .actions,.importbar,#previewPanel,#importStatus,.history-controls,.notice,#historySummary + p {display:none!important}
 </style></head>
 <body>
-<header><div><h1>Gestão de Ociosidade da Frota</h1><p>Painel gerencial • Consulta por unidade, período, categoria, veículo e turno</p></div>
-<div class="actions"><button class="btn primary" onclick="downloadCSV()">Exportar CSV filtrado</button><button class="btn" onclick="location.reload()">Atualizar dados</button></div></header>
+<header><div><h1>Dashboard Gerencial • Ociosidade da Frota</h1><p>Consulta gerencial • Frota e manutenção</p></div>
+<div class="actions"><button class="btn primary" onclick="downloadCSV()">Exportar CSV filtrado</button><button class="btn primary" id="publishButton" type="button">Gerar dados.json para publicar</button><button class="btn" onclick="exportBackup()">Backup JSON completo</button></div></header>
 <main>
-<div class="notice"><b>Consulta pública:</b> dados de Ponta Grossa, Carambeí, Castro e Arapoti publicados pelo administrador. Para consultar as atualizações, use <b>Atualizar dados</b>. A importação de Excel fica restrita ao arquivo de administração.</div><div id="importStatus" class="status" role="status" aria-live="polite"></div>
+<div class="notice"><b>Base histórica local:</b> a base incorporada neste HTML é antiga (06/11/2026) e NÃO contém necessariamente o histórico atual do GitHub. Antes de importar novos CSVs, restaure o dados.json mais recente do GitHub usando “Restaurar backup JSON”. Novas importações passam por conferência antes de serem incorporadas, preservando os dias anteriores. A base fica salva <b>neste navegador/dispositivo</b> quando o armazenamento local estiver disponível. Faça backups JSON regularmente. Para publicar as atualizações no link, clique em <b>Gerar dados.json para publicar</b> e substitua o arquivo dados.json no repositório GitHub. Não publique este arquivo de administração.</div>
+<section class="importbar">
+<div><label for="importUnit">Unidade do relatório CSV ou Excel</label><select id="importUnit"><option value="">Selecione a unidade antes de importar</option><option>Ponta Grossa</option><option>Carambeí</option><option>Castro</option><option>Arapoti</option><option>Garagem Apoio - Jaguariaíva</option></select></div>
+<div><label for="file">Arquivos CSV ou Excel (um ou vários dias)</label><input accept=".xlsx,.xls,.csv" id="file" multiple="" type="file"/><div class="help">Escolha a unidade correspondente a todos os arquivos selecionados.</div></div>
+<button class="btn primary" id="importButton" onclick="importExcelFiles()">1. Conferir arquivos CSV / Excel</button>
+<button class="btn" onclick="document.getElementById('backupFile').click()">Restaurar backup JSON</button><input accept=".json" id="backupFile" style="display:none" type="file"/>
+<button class="btn danger" disabled="" title="Desativado para proteger o histórico" type="button">Restaurar base inicial V8 (desativado)</button>
+</section>
+<section class="card" id="previewPanel" style="display:none;margin-bottom:16px;border:2px solid #2563eb">
+<h2>Conferência antes de adicionar ao histórico</h2>
+<div id="previewSummary" style="white-space:pre-line;line-height:1.8;margin:12px 0"></div>
+<div class="tablewrap"><table><thead><tr><th>Unidade</th><th>Data</th><th>Categoria</th><th>Prefixo</th><th>Placa</th><th>Entrada</th><th>Saída</th><th>Tempo</th></tr></thead><tbody id="previewRows"></tbody></table></div>
+<p class="help">Amostra de até 15 registros novos. Prefixos sem categoria conhecida bloqueiam a importação para evitar classificação incorreta. Confira unidade, data e horários antes de confirmar. Nenhuma alteração foi feita ainda.</p>
+<div class="actions"><button class="btn primary" id="confirmImport" type="button">2. Confirmar e adicionar registros</button><button class="btn" onclick="cancelImport()">Cancelar conferência</button></div>
+</section>
+<section class="card" style="margin-bottom:16px"><h2>Controle do histórico armazenado</h2><div id="historySummary" style="margin:10px 0"></div><p class="help">O arquivo dados.json gerado deve substituir o dados.json do GitHub. O HTML público não precisa ser alterado. Faça backup JSON antes de atualizar.</p></section>
+<div aria-live="polite" class="status" id="importStatus" role="status"></div>
 <section class="filters">
-<div><label>Unidade</label><select id="unitFilter"><option value="">Todas as unidades</option><option>Ponta Grossa</option><option>Carambeí</option><option>Castro</option><option>Arapoti</option></select></div>
-<div><label>Data inicial</label><input id="dateStart" type="date"></div>
-<div><label>Data final</label><input id="dateEnd" type="date"></div>
+<div><label>Unidade</label><select id="unitFilter"><option value="">Todas as unidades</option><option>Ponta Grossa</option><option>Carambeí</option><option>Castro</option><option>Arapoti</option><option>Garagem Apoio - Jaguariaíva</option><option value="__ARAPOTI_GRUPO__">Arapoti + Jaguariaíva (consolidado)</option></select></div>
+<div><label>Data inicial</label><input id="dateStart" type="date"/></div>
+<div><label>Data final</label><input id="dateEnd" type="date"/></div>
 <div><label>Categoria</label><select id="categoryFilter"><option value="">Todas as categorias</option></select></div>
 <div><label>Turno</label><select id="shiftFilter"><option value="">Todos os turnos</option><option value="Madrugada">Madrugada (00:00–05:59)</option><option value="Manhã">Manhã (06:00–11:59)</option><option value="Tarde">Tarde (12:00–17:59)</option><option value="Noite">Noite (18:00–23:59)</option></select></div>
-<div><label>Buscar veículo (placa ou prefixo)</label><input id="search" placeholder="Digite placa ou prefixo"></div>
-
+<div><label>Buscar veículo (placa ou prefixo)</label><input id="search" placeholder="Digite placa ou prefixo"/></div>
 </section>
+<div class="notice" style="background:#e8f2fb;border-color:#b5d7f2;color:#174e78"><b>V8 — presença operacional:</b> a tabela detalhada mostra veículos com ociosidade positiva; os indicadores principais consideram também registros de 0%. Os registros originais continuam no histórico e no dados.json. A opção Arapoti + Jaguariaíva é apenas para consulta; cada CSV continua sendo importado na sua garagem de origem.</div>
 <section class="kpis">
-<div class="card kpi"><div class="cap">Veículos</div><strong id="kVehicles">—</strong><small id="kVehiclesNote">Prefixos distintos na seleção (sem duplicar datas)</small></div>
-<div class="card kpi"><div class="cap">Registros</div><strong id="kRecords">—</strong><small>Intervalos encontrados</small></div>
+<div class="card kpi"><div class="cap">Veículos na base</div><strong id="kVehicles">—</strong><small>Prefixos distintos na seleção</small></div>
+<div class="card kpi"><div class="cap">Registros históricos</div><strong id="kRecords">—</strong><small>Inclui registros de 0%</small></div>
 <div class="card kpi"><div class="cap">Tempo ocioso</div><strong id="kIdle">—</strong><small>Somatório dos intervalos</small></div>
-<div class="card kpi"><div class="cap">Ociosidade real</div><strong id="kPct">—</strong><small>Tempo parado real / tempo disponível dos veículos</small></div>
+<div class="card kpi"><div class="cap">Ociosidade real (%)</div><strong id="kPct">—</strong><small>Tempo parado ÷ veículos-dia presentes nos relatórios</small></div>
 </section>
+<section class="card" style="margin-bottom:16px"><h2>Indicadores complementares</h2><div class="sub" id="extraIndicators">—</div></section>
 <section class="layout">
 <div class="card"><h2>Ociosidade por categoria</h2><div class="sub">Tempo ocioso acumulado na seleção atual</div><div id="categoryBars"></div></div>
 <div class="card"><h2>Distribuição por turno</h2><div class="sub">Tempo dos intervalos distribuído por faixa horária</div><div class="shift" id="shiftCards"></div></div>
 </section>
-<details class="card panel-fold" open><summary>Comparativo diário de ociosidade por garagem</summary><div class="fold-content"><div class="sub" style="margin-bottom:12px">Percentual = minutos ociosos sem sobreposição ÷ (veículos distintos da unidade no dia × 1.440 minutos). Inclui veículos com tempo zero. Aplique os filtros de datas e categoria acima para comparar períodos equivalentes. O filtro de turno limita os intervalos considerados, e nesse caso a base é de 360 minutos por veículo.</div><div class="tablewrap"><table style="min-width:650px"><thead><tr><th>Data</th><th>Garagem</th><th>Veículos</th><th>Tempo ocioso real</th><th>Ociosidade real</th></tr></thead><tbody id="dailyCompare"></tbody></table></div></div></details>
-<details class="card panel-fold" id="maintenanceSection"><summary>Manutenção × Ociosidade</summary><div class="fold-content"><div class="sub" style="margin-bottom:12px">Ordens de serviço por data de entrada e saída. O filtro de categoria identifica a categoria pelo prefixo na base de ociosidade. A ausência de ociosidade não confirma viagem ou manutenção. Ao selecionar uma garagem, aparecem apenas OS de veículos com ociosidade positiva registrada nessa unidade no intervalo de datas selecionado. É um indício de presença, não comprovação de lotação ou localização da oficina.</div><div class="kpis" style="margin-bottom:12px"><div class="card kpi"><div class="cap">OS no período</div><strong id="mTotal">—</strong><small>Ordens distintas</small></div><div class="card kpi"><div class="cap">Veículos com OS</div><strong id="mVehicles">—</strong><small>Prefixos distintos</small></div><div class="card kpi"><div class="cap">OS internas</div><strong id="mInternal">—</strong><small>Atendimentos</small></div><div class="card kpi"><div class="cap">OS externas</div><strong id="mExternal">—</strong><small>Atendimentos</small></div></div><div id="maintenanceStatus" class="sub" style="margin-bottom:10px">Carregando manutenção...</div><div class="tablewrap"><table style="min-width:720px"><thead><tr><th>OS</th><th>Prefixo</th><th>Oficina</th><th>Entrada (OS)</th><th>Saída (OS)</th><th>Situação da OS</th><th>Ociosidade nas garagens*</th></tr></thead><tbody id="maintenanceRows"></tbody></table></div><div class="sub" style="margin-top:10px">* Verifica se existe algum intervalo de ociosidade positivo para o prefixo durante o período da OS, nos dias disponíveis na base. Não representa vínculo permanente com uma garagem.</div></div></details>
-<details class="card panel-fold"><summary>Veículos e intervalos</summary><div class="fold-content"><div class="sub" style="margin-bottom:10px">Clique no título de qualquer coluna para alternar crescente ▲ / decrescente ▼. Clique em um veículo para expandir os intervalos. A unidade aparece em cada linha.</div>
-<div class="tablewrap"><table><thead><tr><th class="sortable" data-sort="prefix" tabindex="0" role="button">Veículo <span class="sortmark"></span></th><th class="sortable" data-sort="unit" tabindex="0" role="button">Unidade <span class="sortmark"></span></th><th class="sortable" data-sort="category" tabindex="0" role="button">Categoria <span class="sortmark"></span></th><th class="sortable" data-sort="records" tabindex="0" role="button">Registros <span class="sortmark"></span></th><th class="sortable" data-sort="duration" tabindex="0" role="button">Tempo ocioso <span class="sortmark"></span></th><th class="sortable" data-sort="pct" tabindex="0" role="button">Ociosidade real <span class="sortmark"></span></th><th class="sortable" data-sort="predominant" tabindex="0" role="button">Turno predominante <span class="sortmark"></span></th></tr></thead><tbody id="vehicleRows"></tbody></table></div></div></details>
-<footer>Protótipo de demonstração • Acesso por link e atualização compartilhada dependem de hospedagem e banco de dados. Confirme a regra do denominador de ociosidade antes de usar percentuais como indicador oficial.</footer>
+<details class="card panel-fold" id="maintenancePanel" style="margin-bottom:16px"><summary>Manutenção × Ociosidade — ordens de serviço</summary><div class="fold-content">
+<p class="sub">Estimativa de ociosidade coincidente com o período da OS: da hora de entrada até o fim da data de saída (horário de saída não fornecido). Não comprova permanência na oficina nem causa da parada. A garagem filtra a ociosidade, não as OS.</p>
+<div class="kpis"><div class="card kpi"><div class="cap">OS no período</div><strong id="mTotal">—</strong></div><div class="card kpi"><div class="cap">Veículos com OS</div><strong id="mVehicles">—</strong></div><div class="card kpi"><div class="cap">OS internas</div><strong id="mInternal">—</strong></div><div class="card kpi"><div class="cap">OS externas</div><strong id="mExternal">—</strong></div></div>
+<div class="sub" id="maintenanceEstimate" style="margin-bottom:8px;font-weight:650"></div><div class="sub" id="maintenanceStatus" style="margin-bottom:12px"></div>
+<div class="tablewrap"><table><thead><tr><th data-os-sort="os" role="button" tabindex="0">OS ↕</th><th data-os-sort="prefix" role="button" tabindex="0">Prefixo ↕</th><th data-os-sort="type" role="button" tabindex="0">Tipo ↕</th><th data-os-sort="entry" role="button" tabindex="0">Entrada ↕</th><th data-os-sort="exit" role="button" tabindex="0">Saída ↕</th><th data-os-sort="status" role="button" tabindex="0">Situação ↕</th><th data-os-sort="match" role="button" tabindex="0">Coincidência estimada ↕</th><th aria-label="Ociosidade durante a OS (estimada). Tempo de ociosidade registrado dentro do período estimado da ordem de serviço. Não representa o tempo efetivo de manutenção." data-os-sort="minutes" role="button" tabindex="0" title="Tempo de ociosidade registrado dentro do período estimado da ordem de serviço. Não representa o tempo efetivo de manutenção.">Ociosidade durante a OS (estimada) <span aria-hidden="true" style="font-weight:700;color:#2563eb">ⓘ</span> ↕</th></tr></thead><tbody id="maintenanceRows"></tbody></table></div>
+<div class="actions" style="margin-top:12px"><button class="btn" id="moreMaintenance" type="button">Mostrar mais OS</button><button class="btn" id="exportMaintenance" type="button">Exportar OS filtradas (CSV)</button></div>
+</div></details>
+<section class="card"><h2>Veículos e intervalos</h2><div class="sub" style="margin-bottom:10px">Clique no título de qualquer coluna para alternar crescente ▲ / decrescente ▼. Clique em um veículo para expandir os intervalos. A unidade aparece em cada linha.</div>
+<div class="tablewrap"><table><thead><tr><th class="sortable" data-sort="prefix" role="button" tabindex="0">Veículo <span class="sortmark"></span></th><th class="sortable" data-sort="unit" role="button" tabindex="0">Unidade <span class="sortmark"></span></th><th class="sortable" data-sort="category" role="button" tabindex="0">Categoria <span class="sortmark"></span></th><th class="sortable" data-sort="records" role="button" tabindex="0">Registros <span class="sortmark"></span></th><th class="sortable" data-sort="duration" role="button" tabindex="0">Tempo ocioso <span class="sortmark"></span></th><th class="sortable" data-sort="pct" role="button" tabindex="0">Ociosidade real (%) <span class="sortmark"></span></th><th class="sortable" data-sort="predominant" role="button" tabindex="0">Turno predominante <span class="sortmark"></span></th></tr></thead><tbody id="vehicleRows"></tbody></table></div></section>
+<footer>Admin V8 de importação com cinco unidades • Para publicar, exporte dados.json e hospede com index.html. Confirme a regra do denominador de ociosidade antes de usar percentuais como indicador oficial.</footer>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
 let allRows = [];
-// Dados publicados são carregados de dados.json acompanha este HTML. O histórico importado é mantido localmente.
+// A base é carregada dos arquivos JSON publicados. O histórico importado é mantido localmente.
 const INITIAL_ROWS=[];
-function keyOf(r){return [r.unit,r.date,r.category,r.plate,r.prefix,r.start??'',r.end??'',r.duration,r.pct].join('|')}
+const STORAGE_KEY='ociosidade_frota_admin_v8_5_garagens';
+function keyOf(r){const num=v=>v==null?'':Math.round(Number(v)*60);return [r.unit,r.date,r.category,r.plate,r.prefix,num(r.start),num(r.end)].join('|')}
 function deduplicate(rows){const seen=new Set();return rows.filter(r=>{const k=keyOf(r);if(seen.has(k))return false;seen.add(k);return true})}
 function saveLocal(){return false}
-function loadLocal(){return false}
-const loadedSaved=false;
-function showStatus(message){document.getElementById('importStatus').textContent=message}
+function loadLocal(){allRows=deduplicate(INITIAL_ROWS);return false}
+const loadedSaved=loadLocal();
+function showStatus(message){const el=document.getElementById('importStatus');if(el)el.textContent=message}
 function downloadFile(name,content,type){const url=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
+function exportPublish(){
+ try {
+  const total=allRows.length;
+  if(!window.confirm('ATENÇÃO: confirme que restaurou o dados.json MAIS RECENTE do GitHub. Publicar uma base antiga pode retirar registros do dashboard. Deseja continuar?'))return;
+  if(!window.confirm('Gerar dados.json com '+total+' registros de '+new Set(allRows.map(r=>r.date)).size+' data(s)?'))return;
+  const content=JSON.stringify({version:1,updatedAt:new Date().toISOString(),rows:allRows},null,2);
+  downloadFile('dados.json',content,'application/json;charset=utf-8');
+  showStatus('Exportação solicitada: dados.json ('+total+' registros). Confira a pasta Downloads. Se não aparecer, verifique se o Chrome bloqueou downloads.');
+ }catch(e){
+  console.error(e);
+  showStatus('Erro ao gerar dados.json: '+String(e.message||e));
+  window.alert('Erro ao gerar dados.json: '+String(e.message||e));
+ }
+}
+document.getElementById('publishButton').addEventListener('click',exportPublish);
 function exportBackup(){downloadFile('backup_ociosidade_frota_'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({version:1,exportedAt:new Date().toISOString(),rows:allRows},null,2),'application/json;charset=utf-8')}
-
+function resetBase(){cancelImport();if(!confirm('Restaurar a base inicial consolidada das cinco garagens? Isso apaga os registros adicionais salvos neste navegador. Exporte um backup antes de continuar.'))return;allRows=deduplicate(INITIAL_ROWS);saveLocal();populate();showStatus('Base inicial restaurada. Registros: '+allRows.length)}
 const $=id=>document.getElementById(id);
 const mins=v=>Number.isFinite(v)?v:0;
 function fmtMin(n){n=Math.round(n);let h=Math.floor(n/60),m=n%60;return h?`${h}h ${String(m).padStart(2,'0')}min`:`${m}min`}
@@ -107,118 +187,135 @@ function populate(){
  const cats=[...new Set(allRows.map(r=>r.category))].filter(Boolean).sort();
  $('categoryFilter').innerHTML='<option value="">Todas as categorias</option>'+cats.map(c=>`<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join('');
  if(cats.includes(prevCat))$('categoryFilter').value=prevCat;
- render();
+ render();updateHistorySummary();
+}
+function updateHistorySummary(){
+ const byUnit=new Map();for(const r of allRows){const k=r.unit||'Sem unidade';if(!byUnit.has(k))byUnit.set(k,{rows:0,dates:new Set(),vehicles:new Set()});const x=byUnit.get(k);x.rows++;x.dates.add(r.date);x.vehicles.add(r.prefix+'|'+r.plate)}
+ const lines=[...byUnit].sort((a,b)=>a[0].localeCompare(b[0],'pt-BR')).map(([unit,x])=>`<tr><td>${escapeHTML(unit)}</td><td>${x.dates.size}</td><td>${x.vehicles.size}</td><td>${x.rows}</td></tr>`);
+ if(!$('historySummary'))return;
+ $('historySummary').innerHTML=`<div class="tablewrap"><table><thead><tr><th>Unidade</th><th>Dias no histórico</th><th>Veículos distintos</th><th>Registros</th></tr></thead><tbody>${lines.join('')}</tbody></table></div><p class="help">Total: ${allRows.length} registros em ${new Set(allRows.map(r=>r.date)).size} data(s). Os números refletem os dados salvos neste navegador.</p>`;
 }
 function escapeHTML(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function filtered(){
- const start=$('dateStart').value,end=$('dateEnd').value,unit=$('unitFilter').value,cat=$('categoryFilter').value,search=$('search').value.toLowerCase(),shift=$('shiftFilter').value;
- return allRows.filter(r=>(!start||r.date>=start)&&(!end||r.date<=end)&&(!unit||r.unit===unit)&&(!cat||r.category===cat)&&(!search||r.plate.toLowerCase().includes(search)||r.prefix.toLowerCase().includes(search)||prefixKey(r.prefix).includes(prefixKey(search)))&&(!shift||shiftMinutes(r)[['Madrugada','Manhã','Tarde','Noite'].indexOf(shift)]>0));
+function baseFiltered(){
+ const start=$('dateStart').value,end=$('dateEnd').value,unit=$('unitFilter').value,cat=$('categoryFilter').value,search=$('search').value.toLowerCase();
+ return allRows.filter(r=>(!start||r.date>=start)&&(!end||r.date<=end)&&(!unit||(unit==='__ARAPOTI_GRUPO__'?['Arapoti','Garagem Apoio - Jaguariaíva'].includes(r.unit):r.unit===unit))&&(!cat||r.category===cat)&&(!search||r.plate.toLowerCase().includes(search)||r.prefix.toLowerCase().includes(search)));
 }
-// Une intervalos de um veículo em um dia para não contar períodos sobrepostos duas vezes.
-function mergedMinutes(records,shiftName=''){
- const parts=[];
- const shiftIndex=['Madrugada','Manhã','Tarde','Noite'].indexOf(shiftName);
- const lo=shiftIndex>=0?SHIFTS[shiftIndex].start:0;
- const hi=shiftIndex>=0?SHIFTS[shiftIndex].end:1440;
- for(const r of records){
+function filtered(){
+ const shift=$('shiftFilter').value;
+ return baseFiltered().filter(r=>shift?shiftMinutes(r)[['Madrugada','Manhã','Tarde','Noite'].indexOf(shift)]>0:(Number(r.pct)>0 || (r.start!=null&&r.end!=null&&Number(r.end)!==Number(r.start))));
+}
+function canonicalPrefix(r){return String(r.prefix||r.plate||'').replace(/[^a-zA-Z0-9]/g,'').toUpperCase()}
+function selectionIsCombined(){return !$('unitFilter').value || $('unitFilter').value==='__ARAPOTI_GRUPO__'}
+// Percentual real: minutos parados (sem sobreposição) / minutos disponíveis.
+// A unidade de análise é cada veículo em cada dia, não cada intervalo do Excel.
+function vehicleDayKey(r){return [selectionIsCombined()?'':r.unit,canonicalPrefix(r),r.date].join('|')}
+function minutesAvailable(rows){return new Set(rows.map(vehicleDayKey)).size*($('shiftFilter').value?360:1440)}
+function actualIdleMinutes(rows){
+ const shift=$('shiftFilter').value;
+ const selected=SHIFTS.find(s=>s.name===shift);
+ const byDay=new Map();
+ for(const r of rows){
   if(r.start==null||r.end==null)continue;
   let a=Number(r.start),b=Number(r.end);
   if(!Number.isFinite(a)||!Number.isFinite(b))continue;
   if(b<a)b+=1440;
-  a=Math.max(lo,a);b=Math.min(hi,b);
-  if(b>a)parts.push([a,b]);
+  // Limita a duração à janela do dia relatado; eventos que passam da meia-noite
+  // não devem criar mais de 24h de disponibilidade no mesmo veículo-dia.
+  const windows=selected?[[selected.start,selected.end]]:[[0,1440]];
+  for(const [lo,hi] of windows){
+   const start=Math.max(lo,a),end=Math.min(hi,b);
+   if(end<=start)continue;
+   const key=vehicleDayKey(r);
+   if(!byDay.has(key))byDay.set(key,[]);
+   byDay.get(key).push([start,end]);
+  }
  }
- parts.sort((a,b)=>a[0]-b[0]);
- let total=0,begin=-1,end=-1;
- for(const [a,b] of parts){if(begin<0){begin=a;end=b}else if(a<=end){end=Math.max(end,b)}else{total+=end-begin;begin=a;end=b}}
- if(begin>=0)total+=end-begin;
+ let total=0;
+ for(const intervals of byDay.values()){
+  intervals.sort((a,b)=>a[0]-b[0]);
+  let a=-1,b=-1;
+  for(const [start,end] of intervals){
+   if(start>b){if(b>a)total+=b-a;a=start;b=end}
+   else b=Math.max(b,end);
+  }
+  if(b>a)total+=b-a;
+ }
  return total;
 }
-function calculateReal(rows,shiftName=''){
- const groups=new Map();
- for(const r of rows){const key=[r.date,r.unit,r.prefix].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(r)}
- let idle=0;
- for(const recs of groups.values())idle+=mergedMinutes(recs,shiftName);
- const available=groups.size*(shiftName?360:1440);
- return {idle,available,pct:available?100*idle/available:0,vehicleDays:groups.size};
-}
-function renderDaily(rows){
- const by=new Map();
- for(const r of rows){const key=r.date+'|'+r.unit;if(!by.has(key))by.set(key,[]);by.get(key).push(r)}
- const shift=$('shiftFilter').value;
- const items=[...by.entries()].map(([key,recs])=>{
-  const [date,unit]=key.split('|');
-  const stats=calculateReal(recs,shift);
-  return {date,unit,vehicles:new Set(recs.map(r=>r.prefix)).size,...stats};
- }).sort((a,b)=>b.date.localeCompare(a.date)||a.unit.localeCompare(b.unit,'pt-BR'));
- $('dailyCompare').innerHTML=items.map(x=>`<tr><td>${labelDate(x.date)}</td><td>${escapeHTML(x.unit)}</td><td>${x.vehicles}</td><td>${fmtMin(x.idle)}</td><td><b>${x.pct.toFixed(1).replace('.',',')}%</b></td></tr>`).join('')||'<tr><td colspan="5" class="empty">Nenhum dado para os filtros escolhidos.</td></tr>';
-}
+function realPct(rows){const available=minutesAvailable(rows);return available?100*actualIdleMinutes(rows)/available:0}
 let sortBy='prefix', sortDir='asc';
 function compareValues(a,b,key){
  if(typeof a==='number' && typeof b==='number') return a-b;
  return String(a??'').localeCompare(String(b??''),'pt-BR',{numeric:true,sensitivity:'base'});
 }
+// Índice por prefixo e data: evita percorrer todas as OS para cada intervalo.
+const osIndexByPrefix = new Map();
+let osIndexReady = false;
+function ensureOSIndex(){
+ if(osIndexReady)return;
+ for(const order of MAINTENANCE_ORDERS){
+  const key=maintenanceKey(order.prefixKey||order.prefix);
+  if(!osIndexByPrefix.has(key))osIndexByPrefix.set(key,[]);
+  osIndexByPrefix.get(key).push(order);
+ }
+ osIndexReady=true;
+}
+function osForVehicleDay(prefix,date){
+ ensureOSIndex();
+ if(!date)return [];
+ return (osIndexByPrefix.get(maintenanceKey(prefix))||[]).filter(o=>o.entry<=date&&(o.exit||o.entry)>=date);
+}
+function osIcon(prefix,dates){
+ ensureOSIndex();
+ const orders=osIndexByPrefix.get(maintenanceKey(prefix))||[];
+ if(!orders.length||!dates.length)return '';
+ const relevant=orders.filter(o=>dates.some(d=>d&&o.entry<=d&&(o.exit||o.entry)>=d));
+ if(!relevant.length)return '';
+ const unique=[...new Map(relevant.map(o=>[String(o.os),o])).values()];
+ const tip=unique.slice(0,6).map(o=>'OS '+o.os+' ('+o.entry+' a '+(o.exit||o.entry)+')').join(' | ');
+ return `<span class="os-alert" title="${escapeHTML(tip)}" aria-label="${unique.length} ordem(ns) de serviço no período" role="img">OS <small>${unique.length}</small></span>`;
+}
+// Detalhes são montados apenas ao abrir o veículo, não a cada filtro.
+let detailCache=new Map();
+function renderVehicleDetails(rows){
+ return rows.slice().sort((a,b)=>a.date.localeCompare(b.date)||(a.start??-1)-(b.start??-1)).map(r=>`<tr class="detail"><td colspan="2">${r.date?labelDate(r.date):'—'} ${osIcon(r.prefix,[r.date])} • ${escapeHTML(r.unit)} • ${escapeHTML(r.plate)} / Prefixo ${escapeHTML(r.prefix)}</td><td>Início: ${r.start==null?'—':clock(r.start)} • Fim: ${r.end==null?'—':clock(r.end)}</td><td>${fmtMin(r.start==null||r.end==null?r.duration:Math.max(0,(r.end<r.start?r.end+1440:r.end)-r.start))}</td><td>${(r.pct||0).toFixed(2).replace('.',',')}%</td><td colspan="2">${intervalShifts(r)}</td></tr>`).join('');
+}
 function render(){
- renderMaintenance();
- let rows=filtered(), groups={};
+ let baseRows=baseFiltered(), rows=filtered(), groups={};
  rows.forEach(r=>{let k=r.unit+'|'+r.category+'|'+r.plate+'|'+r.prefix;if(!groups[k])groups[k]={unit:r.unit,category:r.category,plate:r.plate,prefix:r.prefix,rows:[]};groups[k].rows.push(r)});
  let vehicles=Object.values(groups).map(g=>{
-  // Percentual real: união dos intervalos por veículo/dia, sem média de porcentagens.
-  const realVehicle=calculateReal(g.rows,$('shiftFilter').value);
-  const total=realVehicle.idle;
-  const avg=realVehicle.pct;
+  const total=actualIdleMinutes(g.rows);
+  const avg=realPct(g.rows);
   const st=[0,0,0,0];g.rows.forEach(r=>shiftMinutes(r).forEach((v,j)=>st[j]+=v));
   const predominant=SHIFTS[st.indexOf(Math.max(...st))]?.name||'—';
   return {...g,total,avg,predominant};
  });
  const sortValue=g=>({prefix:g.prefix,plate:g.plate,unit:g.unit,category:g.category,records:g.rows.length,duration:g.total,pct:g.avg,predominant:g.predominant}[sortBy]);
  vehicles.sort((a,b)=>compareValues(sortValue(a),sortValue(b))*(sortDir==='asc'?1:-1) || compareValues(a.prefix,b.prefix));
- let real=calculateReal(rows,$('shiftFilter').value), idle=real.idle, pct=real.pct;
- renderDaily(rows);
- // Todas as unidades: frota distinta. Unidade específica: somente prefixos com
- // ao menos um intervalo de ociosidade positivo no período/turno selecionado.
- // Isso indica atividade ociosa registrada na unidade, não lotação oficial.
- const selectedUnit=$('unitFilter').value;
- let countedVehicles;
- if(selectedUnit){
-  const byVehicleDay=new Map();
-  for(const r of rows){
-   const k=prefixKey(r.prefix)+'|'+r.date;
-   if(!byVehicleDay.has(k))byVehicleDay.set(k,[]);
-   byVehicleDay.get(k).push(r);
-  }
-  const activePrefixes=new Set();
-  for(const [k,recs] of byVehicleDay){
-   if(mergedMinutes(recs,$('shiftFilter').value)>0)activePrefixes.add(k.split('|')[0]);
-  }
-  countedVehicles=activePrefixes.size;
-  $('kVehiclesNote').textContent='Prefixos com ociosidade positiva na unidade (estimativa; não comprova lotação)';
- }else{
-  countedVehicles=new Set(rows.map(r=>prefixKey(r.prefix))).size;
-  $('kVehiclesNote').textContent='Prefixos distintos na seleção (sem duplicar unidades ou datas)';
- }
- $('kVehicles').textContent=countedVehicles.toLocaleString('pt-BR');$('kRecords').textContent=rows.length;$('kIdle').textContent=fmtMin(idle);$('kPct').textContent=pct.toFixed(1).replace('.',',')+'%';
- let byCat={};rows.forEach(r=>byCat[r.category]=(byCat[r.category]||0)+mins(r.duration));
+ let idle=actualIdleMinutes(rows), pct=realPct(rows);
+ $('kVehicles').textContent=new Set(baseRows.map(canonicalPrefix)).size;
+ $('kRecords').textContent=baseRows.length.toLocaleString('pt-BR');
+ idle=actualIdleMinutes(baseRows);pct=realPct(baseRows);
+ $('kIdle').textContent=fmtMin(idle);$('kPct').textContent=pct.toFixed(2).replace('.',',')+'%';
+ $('extraIndicators').innerHTML='<b>Veículos com ociosidade:</b> '+new Set(rows.map(canonicalPrefix)).size+' &nbsp; | &nbsp; <b>Registros com ociosidade:</b> '+rows.length.toLocaleString('pt-BR')+' &nbsp; | &nbsp; <b>Veículos-dia considerados:</b> '+new Set(baseRows.map(vehicleDayKey)).size.toLocaleString('pt-BR')+'<p class="help">Em consultas consolidadas, um prefixo no mesmo dia conta uma vez, mesmo quando aparece em mais de uma garagem. Os intervalos simultâneos são unidos no cálculo geral; a origem de cada registro é preservada.</p>';
+ let byCat={};for(const c of new Set(rows.map(r=>r.category))){byCat[c]=actualIdleMinutes(rows.filter(r=>r.category===c))}
  let max=Math.max(1,...Object.values(byCat));
  $('categoryBars').innerHTML=Object.entries(byCat).sort((a,b)=>b[1]-a[1]).map(([c,v])=>`<div class="barrow"><span>${c}</span><div class="track"><div class="fill" style="width:${v/max*100}%"></div></div><b>${fmtMin(v)}</b></div>`).join('')||'<div class="empty">Sem dados para os filtros escolhidos.</div>';
  let shiftNames=SHIFTS.map(s=>s.name),tot=[0,0,0,0];rows.forEach(r=>shiftMinutes(r).forEach((v,i)=>tot[i]+=v));
  $('shiftCards').innerHTML=SHIFTS.map((s,i)=>`<div><span>${s.name} <small style="display:block;color:var(--muted)">${s.label}</small></span><b>${fmtMin(tot[i])}</b></div>`).join('');
+ detailCache=new Map(vehicles.map((g,i)=>['d'+i,g.rows]));
  $('vehicleRows').innerHTML=vehicles.map((g,i)=>{
   let total=g.total,avg=g.avg,predominant=g.predominant;
-  let details=g.rows.slice().sort((a,b)=>a.date.localeCompare(b.date)||(a.start??-1)-(b.start??-1)).map(r=>`<tr class="detail"><td colspan="2">${r.date?labelDate(r.date):'—'} • ${escapeHTML(r.unit)} • ${escapeHTML(r.plate)} / Prefixo ${escapeHTML(r.prefix)}</td><td>Início: ${r.start==null?'—':clock(r.start)} • Fim: ${r.end==null?'—':clock(r.end)}</td><td>${fmtMin(r.start==null||r.end==null?r.duration:Math.max(0,(r.end<r.start?r.end+1440:r.end)-r.start))}</td><td>${(r.pct||0).toFixed(2).replace('.',',')}%</td><td colspan="2">${intervalShifts(r)}</td></tr>`).join('');
-  // Associa OS ao prefixo, respeitando as datas selecionadas e o período visível.
-  const from=$('dateStart').value, to=$('dateEnd').value;
-  const matchingOS=maintenanceOrders.filter(o=>o.prefixKey===prefixKey(g.prefix)&&(!from||!o.exit||o.exit>=from)&&(!to||o.entry<=to));
-  const osMarkup=matchingOS.length?`<div class="os-inline"><h3>Manutenção registrada para o prefixo ${escapeHTML(g.prefix)} (${matchingOS.length} OS)</h3><div class="tablewrap"><table><thead><tr><th>OS</th><th>Oficina</th><th>Entrada</th><th>Saída</th><th>Situação</th></tr></thead><tbody>${matchingOS.map(o=>`<tr><td>${escapeHTML(o.os)}</td><td><span class="os-pill ${o.type==='Externa'?'external':''}">${escapeHTML(o.type)}</span></td><td>${o.entry?labelDate(o.entry):'—'}</td><td>${o.exit?labelDate(o.exit):'—'}</td><td>${escapeHTML(o.status)}</td></tr>`).join('')}</tbody></table></div></div>`:'';
-  return `<tr class="vehicle" onclick="toggleDetail('d${i}')"><td><b>${escapeHTML(g.prefix)}</b> • ${escapeHTML(g.plate)} <span class="pill">ver detalhes ▾</span> ${matchingOS.length?`<span class="os-pill">${matchingOS.length} OS</span>`:``}</td><td>${escapeHTML(g.unit)}</td><td>${escapeHTML(g.category)}</td><td>${g.rows.length}</td><td>${fmtMin(total)}</td><td>${avg.toFixed(1).replace('.',',')}%</td><td>${predominant}</td></tr><tr id="d${i}" style="display:none"><td colspan="7" style="padding:0"><table style="width:100%;min-width:700px"><tbody>${details}</tbody></table>${osMarkup}</td></tr>`;
+  let details=''; // carregamento sob demanda
+  return `<tr class="vehicle" onclick="toggleDetail('d${i}')"><td><b>${escapeHTML(g.prefix)}</b> ${osIcon(g.prefix,[...new Set(g.rows.map(r=>r.date))])} • ${escapeHTML(g.plate)} <span class="pill">ver detalhes ▾</span></td><td>${escapeHTML(g.unit)}</td><td>${escapeHTML(g.category)}</td><td>${g.rows.length}</td><td>${fmtMin(total)}</td><td>${avg.toFixed(2).replace('.',',')}%</td><td>${predominant}</td></tr><tr id="d${i}" style="display:none"><td colspan="7" style="padding:0"><table style="width:100%;min-width:700px"><tbody data-detail="d${i}">${details}</tbody></table></td></tr>`;
  }).join('')||'<tr><td colspan="7" class="empty">Nenhum veículo encontrado.</td></tr>';
  document.querySelectorAll('th.sortable').forEach(th=>{const active=th.dataset.sort===sortBy;th.querySelector('.sortmark').textContent=active?(sortDir==='asc'?'▲':'▼'):'↕';th.setAttribute('aria-sort',active?(sortDir==='asc'?'ascending':'descending'):'none')});
  showStatus('Base histórica: '+allRows.length+' registros em '+new Set(allRows.map(r=>r.date)).size+' data(s) e '+new Set(allRows.map(r=>r.unit)).size+' unidade(s). Seleção atual: '+rows.length+' registros.');
 }
 function clock(m){m=((Math.round(m)%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
-function toggleDetail(id){let e=$(id);e.style.display=e.style.display==='none'?'table-row':'none'}
+function toggleDetail(id){let e=$(id);if(!e)return;const opening=e.style.display==='none';if(opening){const body=e.querySelector('tbody[data-detail]');if(body&&!body.dataset.loaded){body.innerHTML=renderVehicleDetails(detailCache.get(id)||[]);body.dataset.loaded='1';}}e.style.display=opening?'table-row':'none'}
 ['unitFilter','dateStart','dateEnd','categoryFilter','shiftFilter'].forEach(id=>$(id).addEventListener('change',render));
-$('search').addEventListener('input',render);
+let searchTimer; $('search').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(render,220)});
 function activateSort(th){const key=th.dataset.sort;if(sortBy===key)sortDir=sortDir==='asc'?'desc':'asc';else{sortBy=key;sortDir='asc'}render()}
 document.querySelectorAll('th.sortable').forEach(th=>{th.addEventListener('click',()=>activateSort(th));th.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activateSort(th)}})});
 function downloadCSV(){const rows=filtered(),head=['Unidade','Data','Categoria','Placa','Prefixo','Início(min)','Fim(min)','Tempo ocioso(min)','Ociosidade (%)'];const csv=[head,...rows.map(r=>[r.unit,r.date,r.category,r.plate,r.prefix,r.start??'',r.end??'',r.duration,r.pct])].map(r=>r.map(x=>'"'+String(x??'').replaceAll('"','""')+'"').join(';')).join('\n');downloadFile('relatorio_ociosidade_filtrado.csv','\ufeff'+csv,'text/csv;charset=utf-8')}
@@ -235,81 +332,421 @@ function excelTime(v){
  const m=String(v).trim().match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?$/);return m?Number(m[1])*60+Number(m[2])+Number(m[3]||0)/60:null;
 }
 function parseWorkbook(book,unit){
- const sheet=book.Sheets['BASE HISTÓRICA']||book.Sheets[book.SheetNames[0]];
- const raw=XLSX.utils.sheet_to_json(sheet,{header:1,raw:true,defval:null});
- const normalize=t=>String(t??'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
- const headerRow=raw.findIndex(row=>Array.isArray(row)&&row.some(x=>normalize(x)==='prefixo')&&row.some(x=>normalize(x)==='placa'));
- if(headerRow<0)throw Error('Cabeçalho não encontrado (colunas Prefixo e Placa).');
- const hdr=raw[headerRow].map(normalize);
- const col=(...names)=>names.map(n=>hdr.indexOf(normalize(n))).find(i=>i>=0)??-1;
- const idx={date:col('Data'),category:col('Categoria'),plate:col('Placa'),prefix:col('Prefixo'),start:col('Horário inicial','Horario inicial'),end:col('Horário final','Horario final'),duration:col('Tempo ocioso'),pct:col('Ociosidade (%)','Ociosidade %')};
- if(['date','category','plate','prefix','start','end','duration'].some(k=>idx[k]<0))throw Error('Faltam colunas obrigatórias no relatório.');
- return raw.slice(headerRow+1).map(r=>{
-  const get=k=>r[idx[k]],date=excelDate(get('date'));
-  let pct=idx.pct<0?0:Number(get('pct')||0);if(!Number.isFinite(pct))pct=0;
-  return {unit,date,category:String(get('category')??'').trim(),plate:String(get('plate')??'').trim(),prefix:String(get('prefix')??'').trim(),start:excelTime(get('start')),end:excelTime(get('end')),duration:excelTime(get('duration'))||0,pct};
- }).filter(r=>r.date&&r.category&&r.plate&&r.prefix);
-}
-async function loadPublished(){
- showStatus('Carregando histórico publicado...');
- try{
-  const response=await fetch('./dados.json?v='+Date.now(),{cache:'no-store'});
-  if(!response.ok)throw new Error('HTTP '+response.status);
-  const obj=await response.json();
-  if(!Array.isArray(obj.rows))throw new Error('dados.json inválido: campo rows ausente');
-  allRows=deduplicate(obj.rows.filter(r=>r&&r.date&&r.unit&&r.prefix&&r.plate&&r.category));
-  populate();
-  showStatus('Dados publicados carregados: '+allRows.length+' registros • '+new Set(allRows.map(r=>r.date)).size+' datas • '+new Set(allRows.map(r=>r.unit)).size+' unidades. Atualização: '+(obj.updatedAt||'não informada'));
- }catch(error){
-  allRows=[];populate();
-  showStatus('Não foi possível carregar dados.json. Verifique se index.html e dados.json estão publicados na mesma pasta. Detalhe: '+error.message);
- }
-}
-loadPublished();
-
-let maintenanceOrders=[];
-// Prefixos como 40.105 (manutenção) e 40105 (ociosidade) representam o mesmo veículo.
-const prefixKey=v=>String(v??'').toUpperCase().replace(/[^0-9A-Z]/g,'');
-function renderMaintenance(){
- const tbody=document.getElementById('maintenanceRows');if(!tbody)return;
- const ds=$('dateStart').value,de=$('dateEnd').value,search=$('search').value.toUpperCase().trim();
- const unit=$('unitFilter').value,cat=$('categoryFilter').value;
- // A categoria não vem no CSV de manutenção: é identificada pelo prefixo no cadastro histórico de ociosidade.
- // O vínculo usa todos os dias disponíveis, inclusive registros com 0% de ociosidade.
- const categoriesByPrefix=new Map();
- for(const r of allRows){
-  const k=prefixKey(r.prefix);
-  if(!categoriesByPrefix.has(k))categoriesByPrefix.set(k,new Set());
-  categoriesByPrefix.get(k).add(r.category);
- }
- // Uma garagem selecionada limita as OS aos prefixos com ociosidade positiva
- // naquela unidade, dentro do intervalo de datas escolhido. Linhas de 0% não
- // demonstram presença, pois os CSVs listam veículos de outras garagens.
- const presentPrefixes=new Set();
- if(unit){
-  for(const r of allRows){
-   if(r.unit!==unit||(ds&&r.date<ds)||(de&&r.date>de))continue;
-   if(Number(r.duration)>0||Number(r.pct)>0)presentPrefixes.add(prefixKey(r.prefix));
+ const normalize=t=>String(t??'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
+ const out=[];
+ for(const sheetName of book.SheetNames){
+  const sheet=book.Sheets[sheetName];
+  const raw=XLSX.utils.sheet_to_json(sheet,{header:1,raw:true,defval:null});
+  const headerRow=raw.findIndex(row=>Array.isArray(row)&&row.some(x=>normalize(x)==='prefixo')&&row.some(x=>normalize(x)==='placa'));
+  if(headerRow<0)continue;
+  const hdr=raw[headerRow].map(normalize);
+  const col=(...names)=>names.map(n=>hdr.indexOf(normalize(n))).find(i=>i>=0)??-1;
+  const original=col('Dia')>=0 && col('Entrada')>=0 && col('Tempo no Local')>=0;
+  const idx=original?
+   {date:col('Dia'),category:-1,plate:col('Placa'),prefix:col('Prefixo'),start:col('Entrada'),end:col('Saída','SaÃ­da'),duration:col('Tempo no Local'),pct:col('Ociosidade %','Ociosidade (%)')}:
+   {date:col('Data'),category:col('Categoria'),plate:col('Placa'),prefix:col('Prefixo'),start:col('Horário inicial'),end:col('Horário final'),duration:col('Tempo ocioso'),pct:col('Ociosidade (%)')};
+  if(['date','plate','prefix','start','end','duration'].some(k=>idx[k]<0))continue;
+  for(const r of raw.slice(headerRow+1)){
+   const get=k=>r[idx[k]],date=excelDate(get('date'));
+   const plate=String(get('plate')??'').trim(),prefix=String(get('prefix')??'').trim();
+   if(!date||!plate||!prefix)continue;
+   let pct=idx.pct<0?0:Number(get('pct')||0);if(!Number.isFinite(pct))pct=0;
+   out.push({unit,date,category:original?sheetName:String(get('category')??'').trim(),plate,prefix,start:excelTime(get('start')),end:excelTime(get('end')),duration:excelTime(get('duration'))??0,pct});
   }
  }
- const orders=maintenanceOrders.filter(o=>(!ds||!o.exit||o.exit>=ds)&&(!de||o.entry<=de)&&(!search||o.prefix.toUpperCase().includes(search)||o.os.includes(search)||o.prefixKey.includes(prefixKey(search)))&&(!cat||categoriesByPrefix.get(o.prefixKey)?.has(cat))&&(!unit||presentPrefixes.has(o.prefixKey)));
- const visible=allRows.filter(r=>(!unit||r.unit===unit)&&(!cat||r.category===cat));
- const byPrefix=new Map();for(const r of visible){const k=prefixKey(r.prefix);if(!byPrefix.has(k))byPrefix.set(k,[]);byPrefix.get(k).push(r)}
- $('mTotal').textContent=orders.length.toLocaleString('pt-BR');$('mVehicles').textContent=new Set(orders.filter(o=>o.prefixKey!=='OFICINA').map(o=>o.prefixKey)).size.toLocaleString('pt-BR');
- $('mInternal').textContent=orders.filter(o=>o.type==='Interna').length;
- $('mExternal').textContent=orders.filter(o=>o.type==='Externa').length;
- tbody.innerHTML=orders.slice(0,300).map(o=>{
-  const overlap=(byPrefix.get(o.prefixKey)||[]).filter(r=>r.date>=o.entry&&r.date<=(o.exit||'9999-12-31'));
-  const positive=overlap.some(r=>Number(r.duration)>0||Number(r.pct)>0);
-  const presence=positive?'Com ociosidade registrada':overlap.length?'Sem ociosidade positiva':'Sem dados de ociosidade no intervalo';
-  return `<tr><td>${escapeHTML(o.os)}</td><td>${escapeHTML(o.prefixKey)}${o.prefix!==o.prefixKey?` <small style="color:#64748b">(${escapeHTML(o.prefix)})</small>`:''}</td><td>${escapeHTML(o.type)}</td><td>${labelDate(o.entry)}</td><td>${o.exit?labelDate(o.exit):'—'}</td><td>${escapeHTML(o.status)}</td><td>${presence}</td></tr>`
- }).join('')||'<tr><td colspan="7" class="empty">Nenhuma OS para o período selecionado.</td></tr>';
- $('maintenanceStatus').textContent=orders.length+' OS no período; exibindo até 300. O filtro de turno não se aplica à manutenção. '+(cat?' Categoria: '+cat+'.':' Todas as categorias.')+' '+(unit?'OS limitadas a '+presentPrefixes.size+' prefixos com ociosidade positiva em '+unit+' no intervalo selecionado (presença estimada).':'OS de todas as unidades.')+(cat?' OS sem categoria identificável na base de ociosidade não são exibidas.':'');
+ if(!out.length)throw Error('Nenhum registro válido encontrado. Confira se o arquivo possui abas com Dia, Placa, Prefixo, Entrada, Saída e Tempo no Local.');
+ return out;
 }
-async function loadMaintenance(){
- try{const res=await fetch('./manutencao.json?v='+Date.now(),{cache:'no-store'});if(!res.ok)throw Error('HTTP '+res.status);const data=await res.json();if(!Array.isArray(data.orders))throw Error('Campo orders ausente');maintenanceOrders=data.orders.map(o=>({...o,prefixKey:prefixKey(o.prefix)}));render()}
- catch(e){document.getElementById('maintenanceStatus').textContent='Manutenção ainda não publicada. Envie manutencao.json para a mesma pasta do index.html. '+e.message;}
+function csvTable(text){
+ text=text.replace(/^\uFEFF/,'');
+ const first=text.split(/\r?\n/,1)[0];const sep=(first.match(/;/g)||[]).length>(first.match(/,/g)||[]).length?';':',';
+ const out=[];let row=[],v='',quoted=false;
+ for(let i=0;i<text.length;i++){
+  const c=text[i];if(c==='"'){if(quoted&&text[i+1]==='"'){v+='"';i++}else quoted=!quoted}
+  else if(c===sep&&!quoted){row.push(v);v=''}
+  else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&text[i+1]==='\n')i++;row.push(v);if(row.some(x=>x.trim()))out.push(row);row=[];v=''}
+  else v+=c;
+ }
+ row.push(v);if(row.some(x=>x.trim()))out.push(row);return out;
 }
-loadMaintenance();
+function parseCSV(text,unit){
+ const raw=csvTable(text);if(!raw.length)throw Error('CSV vazio');
+ const norm=t=>String(t??'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
+ const head=raw[0].map(norm);const ix=n=>head.indexOf(norm(n));
+ const cols={date:ix('Dia'),plate:ix('Placa'),prefix:ix('Prefixo'),start:ix('Entrada'),end:ix('Saída'),duration:ix('Tempo no Local'),pct:ix('Ociosidade')};
+ if(Object.values(cols).some(x=>x<0))throw Error('Colunas CSV não reconhecidas: '+raw[0].join(', '));
+ const categories=new Map(),ambiguous=new Set();
+ for(const r of allRows){const key=String(r.prefix).trim(),cat=String(r.category||'').trim();if(!key||!cat)continue;if(categories.has(key)&&categories.get(key)!==cat)ambiguous.add(key);else categories.set(key,cat)}
+ const unknown=new Set(),out=[];
+ for(const cells of raw.slice(1)){
+  const get=k=>String(cells[cols[k]]??'').trim(),date=excelDate(get('date')),prefix=get('prefix'),plate=get('plate');
+  if(!date||!prefix||!plate)continue;
+  if(!categories.has(prefix)||ambiguous.has(prefix)){unknown.add(prefix);continue}
+  const start=excelTime(get('start')),end=excelTime(get('end'));
+  const duration=excelTime(get('duration'))??0;
+  const pct=Number(get('pct').replace('%','').trim().replace(',','.'))||0;
+  out.push({unit,date,category:categories.get(prefix),plate,prefix,start,end,duration,pct});
+ }
+ return {rows:out,unknown:[...unknown]};
+}
+let pendingImport=null;
+function cancelImport(){pendingImport=null;$('previewPanel').style.display='none';$('file').value='';showStatus('Conferência cancelada; histórico preservado.');}
+async function importExcelFiles(){
+ const unit=$('importUnit').value,files=Array.from($('file').files);
+ if(!unit){alert('Selecione a unidade correspondente aos arquivos.');return}
+ if(!files.length){alert('Selecione pelo menos um arquivo CSV ou Excel.');return}
+ if(files.some(f=>!/\.csv$/i.test(f.name))&&!window.XLSX){alert('Biblioteca Excel indisponível. Arquivos CSV podem ser importados sem ela.');return}
+ const btn=$('importButton');btn.disabled=true;btn.textContent='Conferindo arquivos...';
+ try{
+  let incoming=[],errors=[],fileSummary=[],unknownPrefixes=new Set();
+  for(const f of files){try{let parsed;if(/\.csv$/i.test(f.name)){const result=parseCSV(await f.text(),unit);parsed=result.rows;result.unknown.forEach(p=>unknownPrefixes.add(p))}else{const book=XLSX.read(await f.arrayBuffer(),{type:'array',cellDates:true});parsed=parseWorkbook(book,unit)}incoming.push(...parsed);fileSummary.push(`${f.name}: ${parsed.length} registro(s)`)}catch(err){errors.push(`${f.name}: ${err.message}`)}}
+  const existing=new Set(allRows.map(keyOf)),unique=new Set(),novel=[];let repeated=0;
+  for(const r of incoming){const k=keyOf(r);if(existing.has(k)||unique.has(k)){repeated++;continue}unique.add(k);novel.push(r)}
+  pendingImport={unit,novel,repeated,read:incoming.length,errors,files:fileSummary,unknown:[...unknownPrefixes]};
+  const dates=[...new Set(novel.map(r=>r.date))].sort();
+  $('previewSummary').textContent=`Unidade: ${unit}\nArquivos: ${files.length}\nRegistros lidos: ${incoming.length}\nNovos registros: ${novel.length}\nDuplicados ignorados: ${repeated}\nDatas dos novos registros: ${dates.join(', ')||'Nenhuma'}\n${fileSummary.join('\n')}\n${unknownPrefixes.size?'ATENÇÃO: prefixos sem categoria segura (não importados): '+[...unknownPrefixes].join(', ')+'\n':''}${errors.length?'\nATENÇÃO — erros:\n'+errors.join('\n'):''}`;
+  $('previewRows').innerHTML=novel.slice(0,15).map(r=>`<tr><td>${escapeHTML(r.unit)}</td><td>${escapeHTML(labelDate(r.date))}</td><td>${escapeHTML(r.category)}</td><td>${escapeHTML(r.prefix)}</td><td>${escapeHTML(r.plate)}</td><td>${r.start==null?'—':clock(r.start)}</td><td>${r.end==null?'—':clock(r.end)}</td><td>${fmtMin(r.duration)}</td></tr>`).join('')||'<tr><td colspan="8">Nenhum registro novo encontrado</td></tr>';
+  $('confirmImport').disabled=!novel.length||unknownPrefixes.size>0||errors.length>0;
+  $('previewPanel').style.display='block';$('previewPanel').scrollIntoView({behavior:'smooth',block:'start'});
+  showStatus(unknownPrefixes.size?'Há prefixos sem classificação: importação bloqueada até conferência.':'Conferência concluída. Clique em 2. Confirmar e adicionar registros para salvar no histórico.');
+ }catch(err){alert('Erro durante a conferência: '+err.message)}finally{btn.disabled=false;btn.textContent='1. Conferir arquivos CSV / Excel'}
+}
+function commitImportRecords(){
+ const button=$('confirmImport');
+ try {
+  if(!pendingImport){showStatus('Nenhuma importação pendente. Confira o arquivo novamente.');return;}
+  if(!pendingImport.novel.length||pendingImport.unknown.length||pendingImport.errors.length){
+   showStatus('Importação bloqueada: existem pendências na conferência.');return;
+  }
+  button.disabled=true;
+  showStatus('Gravando registros no histórico. Aguarde...');
+  const p=pendingImport;
+  const before=allRows.length;
+  const updated=deduplicate([...allRows,...p.novel]);
+  const added=updated.length-before;
+  allRows=updated;
+  const saved=saveLocal();
+  populate();
+  pendingImport=null;
+  $('previewPanel').style.display='none';
+  $('file').value='';
+  showStatus('IMPORTAÇÃO CONCLUÍDA: '+added+' novos registros adicionados em '+p.unit+'. Total no histórico: '+allRows.length+'. '+(saved?'Histórico salvo no Chrome.':'ATENÇÃO: armazenamento local falhou. Exporte um backup JSON imediatamente.'));
+  window.alert('Importação concluída! '+added+' registros novos adicionados. Histórico total: '+allRows.length+'.');
+ } catch(err) {
+  console.error('Falha ao confirmar importação:',err);
+  showStatus('ERRO ao adicionar registros: '+(err?.message||String(err)));
+  window.alert('Erro ao adicionar registros: '+(err?.message||String(err)));
+ } finally {
+  button.disabled=false;
+ }
+}
+$('confirmImport').addEventListener('click',commitImportRecords);
 
+$('backupFile').addEventListener('change',async e=>{
+ const f=e.target.files[0];if(!f)return;
+ try{const obj=JSON.parse(await f.text()),rows=Array.isArray(obj)?obj:obj.rows;
+ if(!Array.isArray(rows)||rows.some(r=>!r.unit||!r.date||!r.plate||!r.prefix||!r.category))throw Error('Formato inválido.');
+ if(!confirm('Restaurar backup? Os registros do arquivo serão mesclados aos atuais, sem apagar dados existentes.'))return;
+ const before=allRows.length;allRows=deduplicate([...allRows,...rows]);const saved=saveLocal();populate();alert(`Backup mesclado: ${allRows.length-before} novos registros.${saved?'':' Atenção: armazenamento local indisponível.'}`);
+ }catch(err){alert('Falha ao ler backup: '+err.message)}finally{e.target.value=''}
+});
+
+// Manutenção incorporada localmente: sem dependência de arquivos externos.
+let MAINTENANCE_ORDERS = [];
+let maintenanceVisibleLimit = 100;
+let maintenanceSortKey='entry', maintenanceSortDir=1;
+const osComparator=new Intl.Collator('pt-BR',{numeric:true,sensitivity:'base'});
+function sortMaintenancePairs(pairs){
+ const key=maintenanceSortKey,dir=maintenanceSortDir;
+ return pairs.sort((a,b)=>{
+  const x=a.o,y=b.o;
+  let v=0;
+  if(key==='minutes')v=a.analysis.minutes-b.analysis.minutes;
+  else if(key==='match')v=Number(a.analysis.minutes>0)-Number(b.analysis.minutes>0);
+  else if(key==='entry')v=osComparator.compare((x.entry||'')+' '+(x.entryTime||''),(y.entry||'')+' '+(y.entryTime||''));
+  else if(key==='exit')v=osComparator.compare(x.exit||'9999-12-31',y.exit||'9999-12-31');
+  else v=osComparator.compare(String(x[key]||''),String(y[key]||''));
+  return dir*v || a.index-b.index;
+ });
+}
+function updateMaintenanceSortHeads(){
+ document.querySelectorAll('[data-os-sort]').forEach(th=>{
+  const key=th.dataset.osSort;
+  th.textContent=({os:'OS',prefix:'Prefixo',type:'Tipo',entry:'Entrada',exit:'Saída',status:'Situação',match:'Coincidência estimada',minutes:'Ociosidade durante a OS (estimada)'})[key]+(key===maintenanceSortKey?(maintenanceSortDir===1?' ▲':' ▼'):' ↕');
+  th.setAttribute('aria-sort',key===maintenanceSortKey?(maintenanceSortDir===1?'ascending':'descending'):'none');
+  th.style.cursor='pointer';
+ });
+}
+function setMaintenanceSort(key){if(key===maintenanceSortKey)maintenanceSortDir*=-1;else {maintenanceSortKey=key;maintenanceSortDir=1;}maintenanceVisibleLimit=100;renderMaintenance();}
+document.querySelectorAll('[data-os-sort]').forEach(th=>{
+ th.addEventListener('click',()=>setMaintenanceSort(th.dataset.osSort));
+ th.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setMaintenanceSort(th.dataset.osSort);}});
+});
+const maintenanceKey = v => String(v??'').replace(/[^a-zA-Z0-9]/g,'').toUpperCase();
+const maintenanceFmtDate = v => /^\d{4}-\d{2}-\d{2}$/.test(v||'') ? v.slice(8,10)+'/'+v.slice(5,7)+'/'+v.slice(0,4) : (v||'—');
+function filteredMaintenance(){
+ const start=$('dateStart').value, end=$('dateEnd').value;
+ const term=maintenanceKey($('search').value);
+ const category=$('categoryFilter').value;
+ const unit=$('unitFilter').value;
+ // Categoria de um prefixo é extraída do cadastro histórico de ociosidade.
+ // Data filtra a OS pela interseção com o período selecionado.
+ const eligiblePrefixes=new Set();
+ if(category){
+  for(const r of allRows){
+   if(r.category===category && (!unit || (unit==='__ARAPOTI_GRUPO__'?['Arapoti','Garagem Apoio - Jaguariaíva'].includes(r.unit):r.unit===unit))){
+    eligiblePrefixes.add(maintenanceKey(r.prefix));
+   }
+  }
+ }
+ return MAINTENANCE_ORDERS.filter(o=>{
+  const entry=o.entry||'', exit=o.exit||'9999-12-31';
+  if(start && exit<start)return false;
+  if(end && entry && entry>end)return false;
+  if(category && !eligiblePrefixes.has(maintenanceKey(o.prefixKey||o.prefix)))return false;
+  if(term && !maintenanceKey(o.prefixKey||o.prefix).includes(term) && !maintenanceKey(o.os).includes(term))return false;
+  return true;
+ });
+}
+function maintenanceOverlapAnalysis(list){
+ // Intervalos reais de ociosidade da seleção; a garagem é preservada, mas
+ // intervalos simultâneos de um prefixo no mesmo dia são unidos.
+ const shift=$('shiftFilter').value;
+ const bounds={'Madrugada':[0,360],'Manhã':[360,720],'Tarde':[720,1080],'Noite':[1080,1440]};
+ const boundsShift=bounds[shift]||[0,1440];
+ const indexed=new Map();
+ for(const r of baseFiltered()){
+  if(r.start==null||r.end==null)continue;
+  const x=Math.max(boundsShift[0],Number(r.start)), y=Math.min(boundsShift[1],Number(r.end));
+  if(!Number.isFinite(x)||!Number.isFinite(y)||y<=x)continue;
+  const key=maintenanceKey(r.prefix)+'|'+r.date;
+  if(!indexed.has(key))indexed.set(key,[]);
+  indexed.get(key).push([x,y]);
+ }
+ const merged=new Map();
+ for(const [key,intervals] of indexed){
+  intervals.sort((a,b)=>a[0]-b[0]);
+  const result=[];
+  for(const [x,y] of intervals){const last=result[result.length-1];if(last&&x<=last[1])last[1]=Math.max(last[1],y);else result.push([x,y]);}
+  merged.set(key,result);
+ }
+ const overall=new Map();
+ const perOrder=list.map(o=>{
+  const key=maintenanceKey(o.prefixKey||o.prefix);
+  if(!/^\d+$/.test(key)||!o.entry||!o.exit||o.exit<o.entry)return {minutes:0,eligible:false};
+  let total=0;
+  const time=o.entryTime||'00:00:00';
+  const parts=time.split(':').map(Number);
+  const entryMin=parts[0]*60+parts[1]+(parts[2]||0)/60;
+  const day=new Date(o.entry+'T12:00:00Z'),last=new Date(o.exit+'T12:00:00Z');
+  for(let count=0;day<=last&&count<366;day.setUTCDate(day.getUTCDate()+1),count++){
+   const date=day.toISOString().slice(0,10);
+   const low=date===o.entry?entryMin:0;
+   const high=1440; // Limite superior, pois não há hora de saída.
+   const intervals=merged.get(key+'|'+date)||[];
+   for(const [x,y] of intervals){
+    const a=Math.max(x,low),b=Math.min(y,high);
+    if(b>a){total+=b-a;const k=key+'|'+date;if(!overall.has(k))overall.set(k,[]);overall.get(k).push([a,b]);}
+   }
+  }
+  return {minutes:total,eligible:true};
+ });
+ let unique=0;
+ for(const intervals of overall.values()){
+  intervals.sort((a,b)=>a[0]-b[0]);
+  // Somar após a união, não por OS, para não duplicar OS simultâneas.
+  let max=-1;
+  for(const [a,b] of intervals){if(a>=max){unique+=b-a;max=b;}else if(b>max){unique+=b-max;max=b;}}
+ }
+ return {perOrder,unique};
+}
+function maintenanceFmtDuration(min){const n=Math.round(min);return `${Math.floor(n/60).toLocaleString('pt-BR')}h ${String(n%60).padStart(2,'0')}min`;}
+function renderMaintenance(){
+ const list=filteredMaintenance();
+ const prefixes=new Set(list.map(o=>maintenanceKey(o.prefixKey||o.prefix)).filter(Boolean));
+ $('mTotal').textContent=list.length.toLocaleString('pt-BR');
+ $('mVehicles').textContent=prefixes.size.toLocaleString('pt-BR');
+ $('mInternal').textContent=list.filter(o=>/^intern/i.test(o.type||'')).length.toLocaleString('pt-BR');
+ $('mExternal').textContent=list.filter(o=>/^extern/i.test(o.type||'')).length.toLocaleString('pt-BR');
+ const analysis=maintenanceOverlapAnalysis(list);
+ const matched=analysis.perOrder.filter(v=>v.minutes>0).length;
+ $('maintenanceEstimate').textContent=`Tempo potencial coincidente, sem duplicar OS simultâneas: ${maintenanceFmtDuration(analysis.unique)} • ${matched} OS com coincidência de horários estimada.`;
+ $('maintenanceStatus').textContent=`${list.length} OS encontradas para os filtros selecionados. O período considera OS em andamento, mesmo que iniciadas antes da data escolhida. Início = data e hora de entrada; fim = 23h59 da data de saída (limite estimado). Não é tempo confirmado em oficina. A categoria selecionada restringe as OS aos prefixos cadastrados nessa categoria; a garagem não atribui a OS a uma unidade.`;
+ const sorted=sortMaintenancePairs(list.map((o,index)=>({o,index,analysis:analysis.perOrder[index]})));
+ updateMaintenanceSortHeads();
+ $('maintenanceRows').innerHTML=sorted.slice(0,maintenanceVisibleLimit).map(({o,analysis:a})=>`<tr><td>${escapeHTML(o.os)}</td><td>${escapeHTML(o.prefix)}</td><td>${escapeHTML(o.type)}</td><td>${maintenanceFmtDate(o.entry)} ${escapeHTML(o.entryTime||'hora não informada')}</td><td>${maintenanceFmtDate(o.exit)}</td><td>${escapeHTML(o.status)}</td><td>${a.minutes>0?'Potencial':'Não identificado'}</td><td>${maintenanceFmtDuration(a.minutes)}</td></tr>`).join('')||'<tr><td colspan="8">Nenhuma OS encontrada nos filtros atuais</td></tr>';
+ $('moreMaintenance').style.display=list.length>maintenanceVisibleLimit?'inline-block':'none';
+ $('moreMaintenance').textContent=`Mostrar mais OS (${Math.min(maintenanceVisibleLimit,list.length)} de ${list.length})`;
+}
+$('moreMaintenance').addEventListener('click',()=>{maintenanceVisibleLimit+=100;renderMaintenance()});
+$('exportMaintenance').addEventListener('click',()=>{
+ const rows=filteredMaintenance(), analysis=maintenanceOverlapAnalysis(rows), sorted=sortMaintenancePairs(rows.map((o,index)=>({o,index,analysis:analysis.perOrder[index]}))), cols=['OS','Prefixo','Tipo','Entrada','Hora de entrada','Saída','Situação','Coincidência potencial','Minutos potenciais'];
+ const cell=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+ const csv='\uFEFF'+[cols.join(';'),...sorted.map(({o,analysis:a})=>[o.os,o.prefix,o.type,o.entry,o.entryTime||'',o.exit,o.status,a.minutes>0?'Potencial':'Não identificado',Math.round(a.minutes)].map(cell).join(';'))].join('\r\n');
+ downloadFile('manutencao_filtrada.csv',csv,'text/csv;charset=utf-8');
+});
+// Atualização direta: os listeners antigos mantêm referência à função render original.
+// Assim, reatribuir render não é suficiente para atualizar a tabela de OS.
+['dateStart','dateEnd','categoryFilter','unitFilter','shiftFilter'].forEach(id=>{
+ const control=document.getElementById(id);
+ if(control)control.addEventListener('change',()=>{
+  if(document.getElementById('maintenancePane')?.classList.contains('active')){
+   maintenanceVisibleLimit=100;
+   renderMaintenance();
+  }
+ });
+});
+let maintenanceSearchTimer;
+document.getElementById('search')?.addEventListener('input',()=>{
+ clearTimeout(maintenanceSearchTimer);
+ maintenanceSearchTimer=setTimeout(()=>{
+  if(document.getElementById('maintenancePane')?.classList.contains('active')){
+   maintenanceVisibleLimit=100;
+   renderMaintenance();
+  }
+ },240);
+});
+// Atualiza a seção de manutenção sempre que os filtros do painel mudarem.
+const originalRender = render;
+render = function(){originalRender();maintenanceVisibleLimit=100;if(document.getElementById('maintenancePane')?.classList.contains('active'))renderMaintenance()};
+
+// A inicialização ocorrerá após o carregamento remoto.
+</script><script>
+(function(){
+ const main=document.querySelector('main');if(!main)return;
+ const filters=main.querySelector('.filters');if(!filters)return;
+ const tabs=document.createElement('nav');tabs.className='tabbar';tabs.setAttribute('aria-label','Áreas do painel');
+ const names=[['overview','📊 Visão geral'],['fleet','🚌 Análise da frota'],['maintenance','🔧 Manutenção']];
+ const panes={};
+ names.forEach(([id,label])=>{const b=document.createElement('button');b.type='button';b.className='tabbtn';b.dataset.tab=id;b.textContent=label;b.setAttribute('aria-selected','false');tabs.appendChild(b);const pane=document.createElement('section');pane.id=id+'Pane';pane.className='tabpane';panes[id]=pane;});
+ filters.parentNode.insertBefore(tabs,filters);
+ const after=filters.nextSibling;
+ Object.values(panes).forEach(p=>main.insertBefore(p,after));
+ function move(el,dest){if(el)dest.appendChild(el)}
+ function intro(dest,title,description){const x=document.createElement('div');x.className='sectionintro';x.innerHTML='<h2>'+title+'</h2><p>'+description+'</p>';dest.prepend(x)}
+ const topNotice=main.querySelector('.notice');
+ const importbar=main.querySelector('.importbar');
+ const preview=main.querySelector('#previewPanel');
+ const hist=main.querySelector('#historySummary')?.closest('section');
+ const importStatus=main.querySelector('#importStatus');
+ const note=filters.nextElementSibling?.classList.contains('notice')?filters.nextElementSibling:main.querySelector('.notice[style*="e8f2fb"]');
+ const kpis=main.querySelector('section.kpis');
+ const extra=main.querySelector('#extraIndicators')?.closest('section');
+ const chart=main.querySelector('section.layout');
+ const maint=main.querySelector('#maintenancePanel');
+ const vehicle=main.querySelector('#vehicleRows')?.closest('section.card');
+ const headerActions=document.querySelector('header .actions');
+ const footer=main.querySelector('footer');
+ // KPIs operacionais permanecem disponíveis para o render, sem aparecer na visão geral.
+ move(kpis,panes.overview);
+ // Resumo executivo: substituir tempo e percentual por distribuição da frota.
+ // O indicador de frota total continua representando prefixos únicos entre unidades.
+ const idleCard=document.getElementById('kIdle')?.closest('.card');
+ const pctCard=document.getElementById('kPct')?.closest('.card');
+ if(idleCard)idleCard.style.display='none';
+ if(pctCard)pctCard.style.display='none';
+ if(kpis)kpis.style.gridTemplateColumns='minmax(0,1fr)';
+ const categoryPanel=document.createElement('section');categoryPanel.className='card garage-panel';
+ categoryPanel.innerHTML=`<div class="garage-head"><div><h2>Frota por categoria</h2><p class="sub">Composição consolidada da frota • prefixos distintos, sem duplicação por garagem ou data</p></div></div><div id="categoryDistribution" class="garage-grid"></div><p class="help" id="categoryNote">Cada veículo é contado uma vez. Categorias divergentes para o mesmo prefixo serão sinalizadas.</p>`;
+ panes.overview.appendChild(categoryPanel);
+ // A visão geral independe dos filtros operacionais das outras abas.
+ function updateCategories(){
+  const byPrefix=new Map();
+  for(const r of allRows){
+   const prefix=canonicalPrefix(r);if(!prefix)continue;
+   const cat=String(r.category||'Não informada').trim().toUpperCase()||'NÃO INFORMADA';
+   const date=String(r.date||'');
+   const prev=byPrefix.get(prefix);
+   if(!prev){byPrefix.set(prefix,{category:cat,date,categories:new Set([cat])});continue;}
+   prev.categories.add(cat);
+   if(date>prev.date){prev.category=cat;prev.date=date;}
+  }
+  const counts=new Map();let conflicts=0;
+  for(const x of byPrefix.values()){
+   counts.set(x.category,(counts.get(x.category)||0)+1);
+   if(x.categories.size>1)conflicts++;
+  }
+  const sorted=[...counts].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'pt-BR'));
+  const max=Math.max(1,...sorted.map(x=>x[1]));
+  document.getElementById('categoryDistribution').innerHTML=sorted.map(([cat,n])=>`<div class="garage-item"><div class="garage-name">${escapeHTML(cat)}</div><div class="garage-track"><div class="garage-fill" style="width:${100*n/max}%"></div></div><strong>${n} <span>veículos</span></strong></div>`).join('')||'<p class="sub">Nenhum veículo identificado.</p>';
+  const total=document.getElementById('overviewFleetTotal');if(total)total.textContent=byPrefix.size.toLocaleString('pt-BR');
+  const note=document.getElementById('categoryNote');if(note)note.textContent=conflicts?`${conflicts} prefixo(s) possuem categorias divergentes no histórico; foi utilizada a categoria do registro mais recente. A classificação deve ser conferida.`:'Cada prefixo é contado uma vez, usando sua categoria mais recente na base.';
+ }
+ const overviewTotal=document.createElement('section');overviewTotal.className='card';overviewTotal.style.marginBottom='16px';overviewTotal.innerHTML='<div class="cap">Veículos na base consolidada</div><strong id="overviewFleetTotal" style="display:block;font-size:32px;margin-top:6px">—</strong><small>Prefixos distintos em todas as unidades e datas</small>';
+ panes.overview.insertBefore(overviewTotal,categoryPanel);
+ // Preserva os KPIs originais no DOM para os cálculos e a navegação, mas não os exibe na visão geral.
+ if(kpis){kpis.style.display='none';panes.fleet.prepend(kpis);}
+ const prevRender=render;
+ render=function(){prevRender();updateCategories();};
+ updateCategories();
+ move(chart,panes.fleet);move(vehicle,panes.fleet);if(vehicle)vehicle.classList.add('vehicle-card');
+ // A visualização por categoria e turno continua calculada, mas não ocupa a tela da frota.
+ if(chart)chart.style.display='none';
+ // Controle de expandir/recolher sem recriar a tabela nem os seus eventos.
+ if(vehicle){
+   const fold=document.createElement('details');
+   fold.className='fleet-vehicle-fold';
+   fold.open=true;
+   const heading=document.createElement('summary');
+   heading.textContent='Veículos e intervalos';
+   heading.setAttribute('aria-label','Expandir ou recolher veículos e intervalos');
+   fold.appendChild(heading);
+   vehicle.parentNode.insertBefore(fold,vehicle);
+   fold.appendChild(vehicle);
+   const oldHeading=vehicle.querySelector('h2');
+   if(oldHeading&&oldHeading.textContent.trim()==='Veículos e intervalos')oldHeading.remove();
+ }
+ move(maint,panes.maintenance);if(maint)maint.open=true;
+ // Versão pública: excluir controles administrativos e a aba Histórico.
+ // Os dados históricos permanecem incorporados para alimentar os filtros.
+ // Elementos de apoio precisam permanecer no DOM: render() atualiza
+  // extraIndicators e importStatus em toda interação de filtros/ordenação.
+  // Removê-los interrompia o render antes da atualização da tabela.
+  [extra,importStatus].forEach(el=>{if(el){el.style.display='none';el.setAttribute('aria-hidden','true')}});
+  [topNotice,importbar,preview,hist,note,headerActions].forEach(el=>{if(el)el.remove()});
+ if(footer){footer.textContent='Dashboard Gerencial V8 • Consulta somente leitura • Dados atualizados pelo GitHub';main.appendChild(footer)}
+ intro(panes.overview,'Resumo executivo','Composição consolidada da frota, sem filtros operacionais.');
+ intro(panes.fleet,'Análise da frota','Consulte veículos e intervalos. Expanda a seção pela seta; o selo vermelho OS indica manutenção nas datas correspondentes.');
+ intro(panes.maintenance,'Manutenção × Ociosidade','Filtre OS em andamento na data ou período selecionado, por categoria e prefixo. Clique nas colunas para ordenar.');
+
+ // O histórico permanece nos dados para as consultas, mas sem aba pública.
+ function show(id){if(!panes[id])return; filters.style.display=id==='overview'?'none':''; if(id==='maintenance')renderMaintenance(); Object.entries(panes).forEach(([key,p])=>p.classList.toggle('active',key===id));tabs.querySelectorAll('.tabbtn').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===id)));try{history.replaceState(null,'','#'+id)}catch(e){} }
+ tabs.addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)show(b.dataset.tab)});
+ const initial=location.hash.slice(1);show(panes[initial]?initial:'overview');
+})();
+// O dashboard público consulta os arquivos JSON da mesma pasta do index.html.
+// Não existe fallback silencioso para a base antiga: erro de rede deve ser visível.
+(async function carregarDadosPublicos(){
+ const status=document.createElement('div');
+ status.id='publicDataStatus';
+ status.setAttribute('role','status');
+ status.style.cssText='margin:12px 16px;padding:12px 16px;border-radius:10px;background:#e8f2fb;color:#16466e;font-weight:600';
+ status.textContent='Carregando dados atualizados do GitHub…';
+ const main=document.querySelector('main');
+ const nav=main?.querySelector('.tabbar');
+ if(nav)nav.insertAdjacentElement('afterend',status);else document.body.prepend(status);
+ try{
+  const [rDados,rManutencao]=await Promise.all([
+   fetch('./dados.json',{cache:'no-store'}),
+   fetch('./manutencao.json',{cache:'no-store'})
+  ]);
+  if(!rDados.ok||!rManutencao.ok)throw Error('HTTP dados: '+rDados.status+'; manutenção: '+rManutencao.status);
+  const [dados,manutencao]=await Promise.all([rDados.json(),rManutencao.json()]);
+  if(!Array.isArray(dados.rows))throw Error('dados.json precisa conter a lista rows');
+  if(!Array.isArray(manutencao.orders))throw Error('manutencao.json precisa conter a lista orders');
+  if(dados.rows.some(r=>!r.date||!r.unit||!r.prefix||!r.category))throw Error('Há registros incompletos em dados.json');
+  allRows=deduplicate(dados.rows.map(r=>({...r,unit:r.unit||'Ponta Grossa'})));
+  if(allRows.length!==dados.rows.length)throw new Error('Inconsistência de registros: JSON possui '+dados.rows.length+' linhas, mas '+allRows.length+' são únicas pela chave de intervalo.');
+  MAINTENANCE_ORDERS=manutencao.orders;
+  populate();
+  const datas=allRows.map(r=>r.date).filter(Boolean).sort();
+  const ultima=datas.length?datas[datas.length-1].split('-').reverse().join('/'):'sem registros';
+  status.textContent='Dados carregados: '+allRows.length.toLocaleString('pt-BR')+' registros de ociosidade e '+MAINTENANCE_ORDERS.length.toLocaleString('pt-BR')+' OS • Última data: '+ultima;
+  status.style.background='#e9f6ed';status.style.color='#245a35';
+ }catch(err){
+  console.error('Falha ao carregar dados públicos',err);
+  status.textContent='Não foi possível carregar dados.json e manutencao.json. Verifique os arquivos publicados no GitHub. Detalhe: '+String(err.message||err);
+  status.style.background='#fff0ee';status.style.color='#922b20';
+ }
+})();
 </script></body></html>
