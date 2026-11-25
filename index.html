@@ -117,7 +117,7 @@ header .actions,.importbar,#previewPanel,#importStatus,.history-controls,.notice
 </section>
 <details class="card panel-fold" id="maintenancePanel" style="margin-bottom:16px"><summary>Manutenção × Ociosidade — ordens de serviço</summary><div class="fold-content">
 <p class="sub">Estimativa de ociosidade coincidente com o período da OS: da hora de entrada até a hora de saída informada; sem hora, até o fim da data de saída (estimativa). Não comprova permanência na oficina nem causa da parada. A garagem filtra a ociosidade, não as OS.</p>
-<div class="kpis"><div class="card kpi"><div class="cap">OS no período</div><strong id="mTotal">—</strong></div><div class="card kpi"><div class="cap">Veículos com OS</div><strong id="mVehicles">—</strong></div><div class="card kpi"><div class="cap">OS internas</div><strong id="mInternal">—</strong></div><div class="card kpi"><div class="cap">OS externas</div><strong id="mExternal">—</strong></div></div>
+<div style="margin:12px 0"><label for="maintenanceDateMode" style="display:block;font-weight:600;margin-bottom:6px">Critério de consulta das OS</label><select id="maintenanceDateMode" style="max-width:100%;padding:9px;border:1px solid #d4dfeb;border-radius:8px"><option value="daily">OS abertas no período</option><option value="active">OS vigentes no período</option></select></div><div class="kpis"><div class="card kpi"><div class="cap">OS no período</div><strong id="mTotal">—</strong></div><div class="card kpi"><div class="cap">Veículos com OS</div><strong id="mVehicles">—</strong></div><div class="card kpi"><div class="cap">OS internas</div><strong id="mInternal">—</strong></div><div class="card kpi"><div class="cap">OS externas</div><strong id="mExternal">—</strong></div></div>
 <div class="sub" id="maintenanceEstimate" style="margin-bottom:8px;font-weight:650"></div><div class="sub" id="maintenanceStatus" style="margin-bottom:12px"></div>
 <div class="tablewrap"><table><thead><tr><th data-os-sort="os" role="button" tabindex="0">OS ↕</th><th data-os-sort="prefix" role="button" tabindex="0">Prefixo ↕</th><th data-os-sort="type" role="button" tabindex="0">Tipo ↕</th><th data-os-sort="entry" role="button" tabindex="0">Entrada ↕</th><th data-os-sort="exit" role="button" tabindex="0">Saída ↕</th><th data-os-sort="status" role="button" tabindex="0">Situação ↕</th><th data-os-sort="match" role="button" tabindex="0">Coincidência estimada ↕</th><th aria-label="Ociosidade durante a OS (estimada). Tempo de ociosidade registrado dentro do período estimado da ordem de serviço. Não representa o tempo efetivo de manutenção." data-os-sort="minutes" role="button" tabindex="0" title="Tempo de ociosidade registrado dentro do período estimado da ordem de serviço. Não representa o tempo efetivo de manutenção.">Ociosidade durante a OS (estimada) <span aria-hidden="true" style="font-weight:700;color:#2563eb">ⓘ</span> ↕</th></tr></thead><tbody id="maintenanceRows"></tbody></table></div>
 <div class="actions" style="margin-top:12px"><button class="btn" id="moreMaintenance" type="button">Mostrar mais OS</button><button class="btn" id="exportMaintenance" type="button">Exportar OS filtradas (CSV)</button></div>
@@ -484,6 +484,17 @@ document.querySelectorAll('[data-os-sort]').forEach(th=>{
 });
 const maintenanceKey = v => String(v??'').replace(/[^a-zA-Z0-9]/g,'').toUpperCase();
 const maintenanceFmtDate = v => /^\d{4}-\d{2}-\d{2}$/.test(v||'') ? v.slice(8,10)+'/'+v.slice(5,7)+'/'+v.slice(0,4) : (v||'—');
+function maintenanceDateMatches(o,start,end,mode){
+ const entry=o.entry||'', exit=o.exit||'';
+ if(!start&&!end)return true;
+ if(!entry)return false;
+ if(end&&entry>end)return false;
+ if(mode!=='active')return !start||entry>=start;
+ if(exit&&exit>=entry)return !start||exit>=start;
+ const status=String(o.status||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase();
+ if(!exit&&['iniciado','pausado','em andamento','aberto'].includes(status))return true;
+ return !start||entry>=start;
+}
 function filteredMaintenance(){
  const start=$('dateStart').value, end=$('dateEnd').value;
  const term=maintenanceKey($('search').value);
@@ -500,9 +511,7 @@ function filteredMaintenance(){
   }
  }
  return MAINTENANCE_ORDERS.filter(o=>{
-  const entry=o.entry||'', exit=o.exit||'9999-12-31';
-  if(start && exit<start)return false;
-  if(end && entry && entry>end)return false;
+  if(!maintenanceDateMatches(o,start,end,$('maintenanceDateMode').value))return false;
   if(category && !eligiblePrefixes.has(maintenanceKey(o.prefixKey||o.prefix)))return false;
   if(term && !maintenanceKey(o.prefixKey||o.prefix).includes(term) && !maintenanceKey(o.os).includes(term))return false;
   return true;
@@ -571,13 +580,14 @@ function renderMaintenance(){
  const analysis=maintenanceOverlapAnalysis(list);
  const matched=analysis.perOrder.filter(v=>v.minutes>0).length;
  $('maintenanceEstimate').textContent=`Tempo potencial coincidente, sem duplicar OS simultâneas: ${maintenanceFmtDuration(analysis.unique)} • ${matched} OS com coincidência de horários estimada.`;
- $('maintenanceStatus').textContent=`${list.length} OS encontradas para os filtros selecionados. O período considera OS em andamento, mesmo que iniciadas antes da data escolhida. Início = data e hora de entrada; fim = hora de saída informada ou fim da data de saída (estimativa quando não há hora). Não é tempo confirmado em oficina. A categoria selecionada restringe as OS aos prefixos cadastrados nessa categoria; a garagem não atribui a OS a uma unidade.`;
+ $('maintenanceStatus').textContent=`${list.length} OS encontradas para os filtros selecionados. ${$('maintenanceDateMode').value==='active'?'Inclui OS com vigência no período; OS concluídas sem saída só aparecem na data de abertura.':'Somente OS abertas no período selecionado.'} Início = data e hora de entrada; fim = hora de saída informada ou fim da data de saída (estimativa quando não há hora). Não é tempo confirmado em oficina. A categoria selecionada restringe as OS aos prefixos cadastrados nessa categoria; a garagem não atribui a OS a uma unidade.`;
  const sorted=sortMaintenancePairs(list.map((o,index)=>({o,index,analysis:analysis.perOrder[index]})));
  updateMaintenanceSortHeads();
  $('maintenanceRows').innerHTML=sorted.slice(0,maintenanceVisibleLimit).map(({o,analysis:a})=>`<tr><td>${escapeHTML(o.os)}</td><td>${escapeHTML(o.prefix)}</td><td>${escapeHTML(o.type)}</td><td>${maintenanceFmtDate(o.entry)} ${escapeHTML(o.entryTime||'hora não informada')}</td><td>${maintenanceFmtDate(o.exit)} ${escapeHTML(o.exitTime||(o.exit?'hora não informada':''))}</td><td>${escapeHTML(o.status)}</td><td>${a.minutes>0?'Potencial':'Não identificado'}</td><td>${maintenanceFmtDuration(a.minutes)}</td></tr>`).join('')||'<tr><td colspan="8">Nenhuma OS encontrada nos filtros atuais</td></tr>';
  $('moreMaintenance').style.display=list.length>maintenanceVisibleLimit?'inline-block':'none';
  $('moreMaintenance').textContent=`Mostrar mais OS (${Math.min(maintenanceVisibleLimit,list.length)} de ${list.length})`;
 }
+$('maintenanceDateMode').addEventListener('change',()=>{maintenanceVisibleLimit=100;renderMaintenance()});
 $('moreMaintenance').addEventListener('click',()=>{maintenanceVisibleLimit+=100;renderMaintenance()});
 $('exportMaintenance').addEventListener('click',()=>{
  const rows=filteredMaintenance(), analysis=maintenanceOverlapAnalysis(rows), sorted=sortMaintenancePairs(rows.map((o,index)=>({o,index,analysis:analysis.perOrder[index]}))), cols=['OS','Prefixo','Tipo','Entrada','Hora de entrada','Saída','Hora de saída','Situação','Coincidência potencial','Minutos potenciais'];
@@ -707,7 +717,7 @@ render = function(){originalRender();maintenanceVisibleLimit=100;if(document.get
  if(footer){footer.textContent='Dashboard Gerencial V8.1 • Consulta somente leitura • Dados atualizados pelo GitHub';main.appendChild(footer)}
  intro(panes.overview,'Resumo executivo','Composição consolidada da frota, sem filtros operacionais.');
  intro(panes.fleet,'Análise da frota','Consulte veículos e intervalos. Expanda a seção pela seta; o selo vermelho OS indica manutenção nas datas correspondentes.');
- intro(panes.maintenance,'Manutenção × Ociosidade','Filtre OS em andamento na data ou período selecionado, por categoria e prefixo. Clique nas colunas para ordenar.');
+ intro(panes.maintenance,'Manutenção × Ociosidade','Consulte OS abertas ou vigentes no período selecionado, por categoria e prefixo. Clique nas colunas para ordenar.');
 
  // O histórico permanece nos dados para as consultas, mas sem aba pública.
  function show(id){if(!panes[id])return; filters.style.display=id==='overview'?'none':''; if(id==='maintenance')renderMaintenance(); Object.entries(panes).forEach(([key,p])=>p.classList.toggle('active',key===id));tabs.querySelectorAll('.tabbtn').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===id)));try{history.replaceState(null,'','#'+id)}catch(e){} }
